@@ -1,34 +1,33 @@
+// Import express
 const express = require('express');
+
+// Import mongoose
 const mongoose = require('mongoose');
+
+// Import CORS
 const cors = require('cors');
-const passport = require('passport');
+
+// Import dotenv
 require('dotenv').config();
 
-const healthRoutes = require('./routes/health');
-const flightRoutes = require('./routes/flights');
-
+// Create Express app
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Middleware
+// Set up middleware
 app.use(cors());
 app.use(express.json());
-app.use(passport.initialize());
 
-// Passport JWT config
-require('./middleware/auth');
+// Set up routes
+app.use('/api/health', require('./routes/health'));
+app.use('/api/flights', require('./routes/flights'));
 
-// Routes
-app.use('/api/health', healthRoutes);
-app.use('/api/flights', flightRoutes);
-
-// MongoDB connection
+// Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('MongoDB connection error', err));
 
+// Start the server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
-
-module.exports = app;
