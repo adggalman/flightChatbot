@@ -155,3 +155,6 @@ Thumbs.db
 
 # Claude
 .claude/
+
+# Proprietary data
+docs/paxManifest.json
