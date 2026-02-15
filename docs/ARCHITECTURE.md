@@ -35,5 +35,5 @@ This diagram illustrates the main components of the Flight Booking Automation Sh
 -   **Backend Service (Node/Express):** The core of the application. It handles business logic, user authentication, and data storage. It acts as a single point of entry for the frontend.
 -   **MongoDB Atlas (Database):** A cloud-hosted NoSQL database used to store user data, bookings, and other application-specific information.
 -   **Amadeus Travel API (External Service):** A third-party API that provides real-time flight information, including search results, pricing, and availability. The Backend Service acts as a proxy to this API.
--   **Mock Flight Ops API (Node/Express):** A custom-built mock service that simulates airline-specific operations that are not available in the Amadeus API, such as getting a passenger list for a specific flight or manually moving a passenger between flights.
+-   **Mock Flight Ops API (Node/Express):** A custom-built mock service running on port 3001. It simulates airline-specific operations via the `/mock-api` prefix. Its purpose is to stand in for operations not available in the live Amadeus API, such as fetching a passenger list (`GET /flights/:flightNumber/passengers`) or creating/deleting mock bookings (`POST` and `DELETE /flight-orders`).
 ```

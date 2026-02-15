@@ -7,6 +7,7 @@ const router = express.Router();
 // Import Amadeus
 const amadeusClient = require('../services/amadeusClient');
 
+// For GET /flight/search
 router.get('/search', async (req, res) => {
     const { origin, destination, departureDate, adults = 1 } = req.query;
 
@@ -39,7 +40,7 @@ router.get('/search', async (req, res) => {
             departureDate: departureDate,
             adults: adults
         });
-        res.status(200).json(JSON.parse(response.body));
+        res.status(200).json(response.data);
 
     } catch (error) {
         console.error('Error calling Amadeus Flight Offers Search API:', error.response ? error.response.data : error.message);

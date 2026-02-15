@@ -1,0 +1,1764 @@
+{
+    "meta": {
+        "count": 5,
+        "links": {
+            "self": "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2026-02-28&returnDate=2026-03-14&adults=2&max=5"
+        }
+    },
+    "data": [
+        {
+            "type": "flight-offer",
+            "id": "1",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "isUpsellOffer": false,
+            "lastTicketingDate": "2026-02-28",
+            "lastTicketingDateTime": "2026-02-28",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT27H30M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2026-02-28T11:15:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-02-28T15:50:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "86",
+                            "aircraft": {
+                                "code": "330"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "3",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-01T09:15:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2026-03-01T10:45:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "801",
+                            "aircraft": {
+                                "code": "320"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT1H30M",
+                            "id": "4",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT14H5M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2026-03-14T14:00:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-14T15:30:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "804",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT1H30M",
+                            "id": "7",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-14T19:30:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2026-03-15T08:05:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "85",
+                            "aircraft": {
+                                "code": "330"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "8",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "949.12",
+                "base": "424.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "949.12"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "GP"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "474.56",
+                        "base": "212.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "3",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "4",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "7",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "8",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "travelerId": "2",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "474.56",
+                        "base": "212.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "3",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "4",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "7",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "8",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "2",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "isUpsellOffer": false,
+            "lastTicketingDate": "2026-02-28",
+            "lastTicketingDateTime": "2026-02-28",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT27H30M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2026-02-28T11:15:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-02-28T15:50:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "86",
+                            "aircraft": {
+                                "code": "330"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "3",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-01T09:15:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2026-03-01T10:45:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "801",
+                            "aircraft": {
+                                "code": "320"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT1H30M",
+                            "id": "4",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT16H20M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2026-03-14T11:45:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-14T13:10:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "802",
+                            "aircraft": {
+                                "code": "320"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT1H25M",
+                            "id": "9",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-14T19:30:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2026-03-15T08:05:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "85",
+                            "aircraft": {
+                                "code": "330"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "10",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "949.12",
+                "base": "424.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "949.12"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "GP"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "474.56",
+                        "base": "212.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "3",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "4",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "9",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "10",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "travelerId": "2",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "474.56",
+                        "base": "212.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "3",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "4",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "9",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "10",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "3",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "isUpsellOffer": false,
+            "lastTicketingDate": "2026-02-28",
+            "lastTicketingDateTime": "2026-02-28",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT29H45M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2026-02-28T11:15:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-02-28T15:50:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "86",
+                            "aircraft": {
+                                "code": "330"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "5",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-01T11:30:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2026-03-01T13:00:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "803",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT1H30M",
+                            "id": "6",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT14H5M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2026-03-14T14:00:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-14T15:30:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "804",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT1H30M",
+                            "id": "7",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-14T19:30:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2026-03-15T08:05:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "85",
+                            "aircraft": {
+                                "code": "330"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "8",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "949.12",
+                "base": "424.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "949.12"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "GP"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "474.56",
+                        "base": "212.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "5",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "6",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "7",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "8",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "travelerId": "2",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "474.56",
+                        "base": "212.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "5",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "6",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "7",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "8",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "4",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "isUpsellOffer": false,
+            "lastTicketingDate": "2026-02-28",
+            "lastTicketingDateTime": "2026-02-28",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT29H45M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2026-02-28T11:15:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-02-28T15:50:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "86",
+                            "aircraft": {
+                                "code": "330"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "5",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-01T11:30:00"
+                            },
+                            "arrival": {
+                                "iataCode": "BKK",
+                                "at": "2026-03-01T13:00:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "803",
+                            "aircraft": {
+                                "code": "321"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT1H30M",
+                            "id": "6",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT16H20M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "BKK",
+                                "at": "2026-03-14T11:45:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-14T13:10:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "802",
+                            "aircraft": {
+                                "code": "320"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT1H25M",
+                            "id": "9",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "SGN",
+                                "terminal": "2",
+                                "at": "2026-03-14T19:30:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "1",
+                                "at": "2026-03-15T08:05:00"
+                            },
+                            "carrierCode": "VJ",
+                            "number": "85",
+                            "aircraft": {
+                                "code": "330"
+                            },
+                            "operating": {
+                                "carrierCode": "VJ"
+                            },
+                            "duration": "PT8H35M",
+                            "id": "10",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "949.12",
+                "base": "424.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "949.12"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "GP"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "474.56",
+                        "base": "212.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "5",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "6",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "9",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "10",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "travelerId": "2",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "474.56",
+                        "base": "212.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "5",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "6",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "9",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESP",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        },
+                        {
+                            "segmentId": "10",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "ESPAU",
+                            "class": "E",
+                            "includedCheckedBags": {
+                                "weight": 40,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "flight-offer",
+            "id": "5",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": false,
+            "isUpsellOffer": false,
+            "lastTicketingDate": "2026-02-15",
+            "lastTicketingDateTime": "2026-02-15",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT14H30M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "SYD",
+                                "terminal": "0",
+                                "at": "2026-02-28T07:15:00"
+                            },
+                            "arrival": {
+                                "iataCode": "DPS",
+                                "terminal": "I",
+                                "at": "2026-02-28T10:45:00"
+                            },
+                            "carrierCode": "OD",
+                            "number": "172",
+                            "aircraft": {
+                                "code": "7M8"
+                            },
+                            "operating": {
+                                "carrierCode": "OD"
+                            },
+                            "duration": "PT6H30M",
+                            "id": "1",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "DPS",
+                                "terminal": "D",
+                                "at": "2026-02-28T14:15:00"
+                            },
+                            "arrival": {
+                                "iataCode": "DMK",
+                                "terminal": "0",
+                                "at": "2026-02-28T17:45:00"
+                            },
+                            "carrierCode": "ID",
+                            "number": "7637",
+                            "aircraft": {
+                                "code": "32A"
+                            },
+                            "operating": {
+                                "carrierCode": "ID"
+                            },
+                            "duration": "PT4H30M",
+                            "id": "2",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                },
+                {
+                    "duration": "PT12H25M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "DMK",
+                                "terminal": "1",
+                                "at": "2026-03-14T13:50:00"
+                            },
+                            "arrival": {
+                                "iataCode": "DPS",
+                                "terminal": "D",
+                                "at": "2026-03-14T19:10:00"
+                            },
+                            "carrierCode": "ID",
+                            "number": "7636",
+                            "aircraft": {
+                                "code": "32A"
+                            },
+                            "operating": {
+                                "carrierCode": "ID"
+                            },
+                            "duration": "PT4H20M",
+                            "id": "11",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        },
+                        {
+                            "departure": {
+                                "iataCode": "DPS",
+                                "terminal": "I",
+                                "at": "2026-03-14T21:10:00"
+                            },
+                            "arrival": {
+                                "iataCode": "SYD",
+                                "terminal": "0",
+                                "at": "2026-03-15T06:15:00"
+                            },
+                            "carrierCode": "OD",
+                            "number": "171",
+                            "aircraft": {
+                                "code": "7M8"
+                            },
+                            "operating": {
+                                "carrierCode": "OD"
+                            },
+                            "duration": "PT6H5M",
+                            "id": "12",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "EUR",
+                "total": "956.56",
+                "base": "686.00",
+                "fees": [
+                    {
+                        "amount": "0.00",
+                        "type": "SUPPLIER"
+                    },
+                    {
+                        "amount": "0.00",
+                        "type": "TICKETING"
+                    }
+                ],
+                "grandTotal": "956.56"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": false
+            },
+            "validatingAirlineCodes": [
+                "GP"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "478.28",
+                        "base": "343.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "1",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "VRTBSSAU",
+                            "brandedFare": "SS",
+                            "brandedFareLabel": "SUPER SAVER",
+                            "class": "V",
+                            "includedCheckedBags": {
+                                "weight": 0,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            },
+                            "amenities": [
+                                {
+                                    "description": "UPTO44LB 20KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO66LB 30KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO88LB40KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO22LB 10KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "PRE RESERVED SEAT ASSIGNMENT",
+                                    "isChargeable": true,
+                                    "amenityType": "PRE_RESERVED_SEAT",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "MEALS",
+                                    "isChargeable": true,
+                                    "amenityType": "MEAL",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "segmentId": "2",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "XRTID",
+                            "class": "X",
+                            "includedCheckedBags": {
+                                "weight": 0,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "quantity": 1
+                            }
+                        },
+                        {
+                            "segmentId": "11",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "XRTID",
+                            "brandedFare": "SS",
+                            "brandedFareLabel": "SUPER SAVER",
+                            "class": "X",
+                            "includedCheckedBags": {
+                                "weight": 0,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "quantity": 1
+                            },
+                            "amenities": [
+                                {
+                                    "description": "UPTO44LB 20KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO66LB 30KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO88LB40KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO22LB 10KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "PRE RESERVED SEAT ASSIGNMENT",
+                                    "isChargeable": true,
+                                    "amenityType": "PRE_RESERVED_SEAT",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "MEALS",
+                                    "isChargeable": true,
+                                    "amenityType": "MEAL",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "segmentId": "12",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "XRTBSSAU",
+                            "brandedFare": "SS",
+                            "brandedFareLabel": "SUPER SAVER",
+                            "class": "X",
+                            "includedCheckedBags": {
+                                "weight": 0,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            },
+                            "amenities": [
+                                {
+                                    "description": "UPTO44LB 20KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO66LB 30KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO88LB40KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO22LB 10KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "PRE RESERVED SEAT ASSIGNMENT",
+                                    "isChargeable": true,
+                                    "amenityType": "PRE_RESERVED_SEAT",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "MEALS",
+                                    "isChargeable": true,
+                                    "amenityType": "MEAL",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "travelerId": "2",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "EUR",
+                        "total": "478.28",
+                        "base": "343.00"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "1",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "VRTBSSAU",
+                            "brandedFare": "SS",
+                            "brandedFareLabel": "SUPER SAVER",
+                            "class": "V",
+                            "includedCheckedBags": {
+                                "weight": 0,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            },
+                            "amenities": [
+                                {
+                                    "description": "UPTO44LB 20KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO66LB 30KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO88LB40KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO22LB 10KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "PRE RESERVED SEAT ASSIGNMENT",
+                                    "isChargeable": true,
+                                    "amenityType": "PRE_RESERVED_SEAT",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "MEALS",
+                                    "isChargeable": true,
+                                    "amenityType": "MEAL",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "segmentId": "2",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "XRTID",
+                            "class": "X",
+                            "includedCheckedBags": {
+                                "weight": 0,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "quantity": 1
+                            }
+                        },
+                        {
+                            "segmentId": "11",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "XRTID",
+                            "brandedFare": "SS",
+                            "brandedFareLabel": "SUPER SAVER",
+                            "class": "X",
+                            "includedCheckedBags": {
+                                "weight": 0,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "quantity": 1
+                            },
+                            "amenities": [
+                                {
+                                    "description": "UPTO44LB 20KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO66LB 30KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO88LB40KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO22LB 10KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "PRE RESERVED SEAT ASSIGNMENT",
+                                    "isChargeable": true,
+                                    "amenityType": "PRE_RESERVED_SEAT",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "MEALS",
+                                    "isChargeable": true,
+                                    "amenityType": "MEAL",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "segmentId": "12",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "XRTBSSAU",
+                            "brandedFare": "SS",
+                            "brandedFareLabel": "SUPER SAVER",
+                            "class": "X",
+                            "includedCheckedBags": {
+                                "weight": 0,
+                                "weightUnit": "KG"
+                            },
+                            "includedCabinBags": {
+                                "weight": 7,
+                                "weightUnit": "KG"
+                            },
+                            "amenities": [
+                                {
+                                    "description": "UPTO44LB 20KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO66LB 30KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO88LB40KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "UPTO22LB 10KG BAGGAGE",
+                                    "isChargeable": true,
+                                    "amenityType": "BAGGAGE",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "PRE RESERVED SEAT ASSIGNMENT",
+                                    "isChargeable": true,
+                                    "amenityType": "PRE_RESERVED_SEAT",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                },
+                                {
+                                    "description": "MEALS",
+                                    "isChargeable": true,
+                                    "amenityType": "MEAL",
+                                    "amenityProvider": {
+                                        "name": "BrandedFare"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "dictionaries": {
+        "locations": {
+            "BKK": {
+                "cityCode": "BKK",
+                "countryCode": "TH"
+            },
+            "DMK": {
+                "cityCode": "BKK",
+                "countryCode": "TH"
+            },
+            "DPS": {
+                "cityCode": "DPS",
+                "countryCode": "ID"
+            },
+            "SGN": {
+                "cityCode": "SGN",
+                "countryCode": "VN"
+            },
+            "SYD": {
+                "cityCode": "SYD",
+                "countryCode": "AU"
+            }
+        },
+        "aircraft": {
+            "330": "AIRBUS INDUSTRIE A330",
+            "320": "AIRBUS A320",
+            "321": "AIRBUS A321",
+            "7M8": "BOEING 737 MAX 8",
+            "32A": "AIRBUS A320 (SHARKLETS)"
+        },
+        "currencies": {
+            "EUR": "EURO"
+        },
+        "carriers": {
+            "VJ": "VIETJET AVIATION",
+            "OD": "BATIK AIR MALAYSIA",
+            "ID": "BATIK AIR INDONESIA"
+        }
+    }
+}

@@ -82,14 +82,16 @@ This document outlines the high-level test scenarios for the main user flows of 
 
 ---
 
-### 5. Move Passenger (Admin/Mock API Flow)
+### 5. Change Flight (Admin/Mock API Flow)
 
-**Objective:** Verify that a passenger can be moved from one flight to another. This is an internal-facing feature that interacts with the Mock Flight Ops API.
+**Objective:** Verify that a passenger's flight can be changed. This is an internal-facing feature that uses the mock booking endpoints.
 
-**Scenario: Successfully Move Passenger**
-- **Given** a passenger is booked on a specific flight (Flight A)
-- **When** a request is made to the Mock Flight Ops API to move the passenger
-- **And** the request includes the passenger's PNR and the new flight number (Flight B)
-- **Then** the passenger's booking should be updated to reflect the new flight (Flight B)
-- **And** a call to the "Get Passenger" endpoint for Flight A should no longer show the passenger
-- **And** a call to the "Get Passenger" endpoint for Flight B should now include the passenger
+**Scenario: Successfully Change a Passenger's Flight**
+- **Given** a passenger is booked on a specific flight (Flight A) with booking ID "ORDER-123"
+- **When** a `DELETE` request is made to `/mock-api/flight-orders/ORDER-123`
+- **Then** the booking for "ORDER-123" is successfully cancelled
+
+- **When** a `POST` request is made to `/mock-api/flight-orders` with the same traveler details but new flight offers for Flight B
+- **Then** a new booking is created for the passenger on Flight B
+- **And** a call to `GET /mock-api/flights/FLIGHT-A-NUMBER/passengers` should no longer include the passenger
+- **And** a call to `GET /mock-api/flights/FLIGHT-B-NUMBER/passengers` should now include the passenger
