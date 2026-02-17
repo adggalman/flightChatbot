@@ -4,9 +4,9 @@ This document is the single source of truth for the current state of the "Flight
 
 ## Current Sprint Status
 
-**Sprint Goal:** Mock services implementation — build mock flight ops API from real Amadeus response shapes.
+**Sprint Goal:** Gemini function calling — wire chatbot to real and mock APIs.
 
-**Current Step:** Mock service fully implemented and tested. All 4 endpoints working on port 3001.
+**Current Step:** Gemini function calling implemented and tested. All 4 tools working end-to-end.
 
 ## Built Components
 
@@ -21,6 +21,8 @@ This document is the single source of truth for the current state of the "Flight
 | User Model | Done | Mongoose schema (email, password, name) |
 | Booking Model | Done | Mongoose schema (userId, flightDetails, pnr, status) |
 | Auth Middleware | Done | Passport JWT strategy scaffolded |
+| LLM Service | Done | Gemini function calling with tool execution loop |
+| Tool Executors | Done | HTTP calls to backend + mock-service endpoints |
 | User Auth Endpoints | Not Started | Registration/login routes not yet created |
 | **Mock Services** | | |
 | Package Setup | Done | express + nodemon installed |
@@ -29,7 +31,8 @@ This document is the single source of truth for the current state of the "Flight
 | routes/booking.js | Done | POST, GET, DELETE /flight-orders |
 | routes/passengers.js | Done | GET /:flightNumber/passengers |
 | **Frontend** | | |
-| React Native App | Not Started | |
+| Expo Chat Screen | Done | Wired to POST /api/chat |
+| React Native App | Done | Expo scaffold with chat UI |
 | **Automation** | | |
 | Cucumber Features | Not Started | |
 | Step Definitions | Not Started | |
@@ -62,23 +65,28 @@ This document is the single source of truth for the current state of the "Flight
 4. ~~User implements mock routes (booking, passengers)~~ Done
 5. ~~User implements server.js to wire it all together~~ Done
 
-## Uncommitted Changes
+## Gemini Function Calling (New)
 
-- `backend/routes/flights.js` — fix: `response.data` instead of `JSON.parse(response.body)`
-- `docs/STATUS.md` — this update
-- `docs/KANBAN.md` — updated board
-- `docs/AMADEUS_API.md` — new file (untracked)
-- `mock-services/*` — new scaffolded files (untracked)
+**Tools wired (4):**
+- `search_flights` → calls `GET /api/flights/search` (Amadeus, same backend)
+- `retrieve_booking` → calls `GET /mock-api/booking/flight-orders/:id` (mock-service)
+- `cancel_booking` → calls `DELETE /mock-api/booking/flight-orders/:id` (mock-service)
+- `get_passengers` → calls `GET /mock-api/flights/:flightNumber/passengers` (mock-service)
+
+**Deferred:** `create_booking` — needs flight offer ID + traveler details, will add once pattern is solid.
+
+**Files:**
+- `backend/services/llmService.js` — tool schemas + execution loop (max 5 iterations)
+- `backend/services/toolExecutors.js` — HTTP calls to backend + mock-service
+- System prompt includes dynamic date so Gemini knows current year
 
 ## Notes for Gemini
 
-- Mock service is COMPLETE and tested — all endpoints working on port 3001
-- KANBAN.md updated — mock services moved to Done
-- Please update ARCHITECTURE.md: mock service runs on port 3001, prefix `/mock-api`
-- Please update TEST_SCENARIOS.md: mock endpoints are finalized (see Mock Endpoints section above)
-- Consider documenting the mock API endpoints in a separate API doc (request/response examples)
-- Response samples are in docs/: flightOffersSearch.json, flightCreateOrdersRequest.json, flightCreateOrdersResponse.json, flightOrder.json
-- paxManifest.json is reference only — DO NOT commit (proprietary airline data)
+- Gemini function calling is COMPLETE and tested — all 4 tools working
+- Please update ARCHITECTURE.md: add function calling flow diagram (User → Expo → chat → Gemini → tool executor → API/mock-service → back to Gemini → text reply)
+- Please update KANBAN.md: move "Gemini function calling" to Done
+- `create_booking` deferred — document as next step
+- Mock service still runs on port 3001, backend on 3000 — both required for full functionality
 
 ## Notes for Claude
 
