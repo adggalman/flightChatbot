@@ -4,9 +4,9 @@ This document is the single source of truth for the current state of the "Flight
 
 ## Current Sprint Status
 
-**Sprint Goal:** Gemini function calling — wire chatbot to real and mock APIs.
+**Sprint Goal:** User authentication — JWT-based auth with role-based access control.
 
-**Current Step:** Gemini function calling implemented and tested. All 4 tools working end-to-end.
+**Current Step:** Auth endpoints implemented and tested. Signup + login working, requireRole middleware ready.
 
 ## Built Components
 
@@ -18,12 +18,12 @@ This document is the single source of truth for the current state of the "Flight
 | Health Check | Done | GET /api/health |
 | Flight Search | Done | GET /api/flights/search → Amadeus proxy |
 | Amadeus Client | Done | SDK initialized with env credentials |
-| User Model | Done | Mongoose schema (email, password, name) |
+| User Model | Done | Mongoose schema (email, password, name, role) + bcrypt hashing + comparePassword |
 | Booking Model | Done | Mongoose schema (userId, flightDetails, pnr, status) |
-| Auth Middleware | Done | Passport JWT strategy scaffolded |
+| Auth Middleware | Done | Passport JWT strategy + requireAuth + requireRole('agent') |
 | LLM Service | Done | Gemini function calling with tool execution loop |
 | Tool Executors | Done | HTTP calls to backend + mock-service endpoints |
-| User Auth Endpoints | Not Started | Registration/login routes not yet created |
+| User Auth Endpoints | Done | POST /api/auth/signup + POST /api/auth/login, JWT with 7d expiry |
 | **Mock Services** | | |
 | Package Setup | Done | express + nodemon installed |
 | server.js | Done | Express on port 3001, health check, route mounting |
@@ -80,12 +80,30 @@ This document is the single source of truth for the current state of the "Flight
 - `backend/services/toolExecutors.js` — HTTP calls to backend + mock-service
 - System prompt includes dynamic date so Gemini knows current year
 
+## User Auth (New)
+
+**Endpoints:**
+- `POST /api/auth/signup` — creates user, returns JWT (accepts optional `role: 'agent'`)
+- `POST /api/auth/login` — validates credentials, returns JWT
+
+**JWT payload:** `{ id, role }` — 7-day expiry, signed with JWT_SECRET
+
+**Roles:** `user` (default), `agent` — enforced via `requireRole()` middleware
+
+**Files:**
+- `backend/routes/auth.js` — signup + login routes
+- `backend/models/User.js` — role field, bcrypt pre-save hook, comparePassword method
+- `backend/middleware/auth.js` — requireAuth (Passport JWT) + requireRole
+- `backend/server.js` — passport.initialize() + auth route mounting
+
+**Next step:** Protect `get_passengers` tool with `requireAuth` + `requireRole('agent')`
+
 ## Notes for Gemini
 
-- Gemini function calling is COMPLETE and tested — all 4 tools working
-- Please update ARCHITECTURE.md: add function calling flow diagram (User → Expo → chat → Gemini → tool executor → API/mock-service → back to Gemini → text reply)
-- Please update KANBAN.md: move "Gemini function calling" to Done
-- `create_booking` deferred — document as next step
+- Auth endpoints are COMPLETE and tested — signup + login working for both user and agent roles
+- Please update ARCHITECTURE.md: add auth flow (signup/login → JWT → protected routes)
+- Please update KANBAN.md: move "User Auth Endpoints" to Done
+- `get_passengers` protection with requireRole('agent') = next task
 - Mock service still runs on port 3001, backend on 3000 — both required for full functionality
 
 ## Notes for Claude
