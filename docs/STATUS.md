@@ -96,7 +96,10 @@ This document is the single source of truth for the current state of the "Flight
 - `backend/middleware/auth.js` — requireAuth (Passport JWT) + requireRole
 - `backend/server.js` — passport.initialize() + auth route mounting
 
-**Next step:** Protect `get_passengers` tool with `requireAuth` + `requireRole('agent')`
+**Next steps:**
+1. Protect `get_passengers` tool with `requireAuth` + `requireRole('agent')`
+2. Migrate mock services from in-memory to MongoDB (needed for Vercel deployment — serverless is stateless)
+3. Deploy backend, mock services, and frontend to Vercel (free tier)
 
 ## Notes for Gemini
 
@@ -104,6 +107,8 @@ This document is the single source of truth for the current state of the "Flight
 - Please update ARCHITECTURE.md: add auth flow (signup/login → JWT → protected routes)
 - Please update KANBAN.md: move "User Auth Endpoints" to Done
 - `get_passengers` protection with requireRole('agent') = next task
+- Mock services need migration from in-memory to MongoDB before Vercel deployment (serverless functions are stateless)
+- Vercel deployment planned for backend, mock services, and frontend (free tier)
 - Mock service still runs on port 3001, backend on 3000 — both required for full functionality
 
 ## Notes for Claude

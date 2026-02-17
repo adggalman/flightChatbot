@@ -73,7 +73,7 @@ const model = genAI.getGenerativeModel({
   }]
 });
 
-async function chat(conversationHistory) {
+async function chat(conversationHistory, role) {
   const chatSession = model.startChat({
     history: conversationHistory.slice(0, -1),
   });
@@ -86,14 +86,27 @@ async function chat(conversationHistory) {
     if (part.functionCall) {
       const functionName = part.functionCall.name;
       const args = part.functionCall.args;
-      const toolResult = await toolExecutors[functionName](args);
-      result = await chatSession.sendMessage([{
-        functionResponse: { name: functionName, response: {toolResult} }
-      }]);
+
+      if (functionName === 'get_passengers' && role !== 'agent') {
+        result = await chatSession.sendMessage([{
+          functionResponse: { name: functionName, response: { error: 'I am sorry but I am unable to help you with this request.' } }
+        }]);
+
+      } else {
+
+        const toolResult = await toolExecutors[functionName](args);
+        result = await chatSession.sendMessage([{
+          functionResponse: { name: functionName, response: { toolResult } }
+        
+        }]);
+      }
+
     }
     else {
       break;
     }
+
+
   }
   return result.response.text();
 }
