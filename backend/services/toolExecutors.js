@@ -17,19 +17,19 @@ async function search_flights(args) {
 };
 // Retrieves booking from mock service
 async function retrieve_booking(args){
-    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/booking/flight-orders/${args.orderId}`);
+    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/booking/flight-orders/${args.orderId}`, { headers:{ 'x-service-key': process.env.SERVICE_API_KEY }});
     return res.json();
-};
+}
 
 // Cancels booking from mock service
 async function cancel_booking(args){
-    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/booking/flight-orders/${args.orderId}`, {method: 'DELETE'});
+    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/booking/flight-orders/${args.orderId}`, {method: 'DELETE', headers:{ 'x-service-key': process.env.SERVICE_API_KEY}}); 
     return res.json();
 };
 
 // Gets passenger list from mock service
 async function get_passengers(args){
-    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/flights/${args.flightNumber}/passengers`);
+    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/flights/${args.flightNumber}/passengers`, { headers:{ 'x-service-key': process.env.SERVICE_API_KEY }});
     return res.json();
 };
 

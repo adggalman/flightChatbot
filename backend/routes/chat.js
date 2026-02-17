@@ -1,10 +1,11 @@
 const express = require('express');
 const { chat } = require('../services/llmService');
+const { requireAuth } = require('../middleware/auth');
 
 const router = express.Router();
 
 // POST /api/chat
-router.post('/', async (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
   const { message, history } = req.body;
 
   if (!message) {
@@ -21,7 +22,7 @@ router.post('/', async (req, res) => {
   ];
 
   try {
-    const reply = await chat(conversationHistory);
+    const reply = await chat(conversationHistory, req.user.role);
     res.json({ reply });
   } catch (error) {
     console.error('LLM error:', error.message);
