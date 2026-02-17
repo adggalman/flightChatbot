@@ -10,8 +10,15 @@ const cors = require('cors');
 // Import dotenv
 require('dotenv').config();
 
+// Import for auth
+const passport = require('passport');
+require('./middleware/auth');
+
 // Create Express app
 const app = express();
+
+// Init passport
+app.use(passport.initialize());
 
 // Set up middleware
 app.use(cors());
@@ -21,6 +28,7 @@ app.use(express.json());
 app.use('/api/health', require('./routes/health'));
 app.use('/api/flights', require('./routes/flights'));
 app.use('/api/chat', require('./routes/chat'));
+app.use('/api/auth', require('./routes/auth'));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
