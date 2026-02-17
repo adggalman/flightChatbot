@@ -20,6 +20,7 @@ app.use(express.json());
 // Set up routes
 app.use('/api/health', require('./routes/health'));
 app.use('/api/flights', require('./routes/flights'));
+app.use('/api/chat', require('./routes/chat'));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
