@@ -4,9 +4,9 @@ This document is the single source of truth for the current state of the "Flight
 
 ## Current Sprint Status
 
-**Sprint Goal:** User authentication — JWT-based auth with role-based access control.
+**Sprint Goal:** MongoDB migration for mock services — persistent storage for serverless deployment.
 
-**Current Step:** Auth endpoints implemented and tested. Signup + login working, requireRole middleware ready.
+**Current Step:** Migration complete. Mock services now use MockFlightOrder model in MongoDB. All endpoints tested and working.
 
 ## Built Components
 
@@ -26,10 +26,13 @@ This document is the single source of truth for the current state of the "Flight
 | User Auth Endpoints | Done | POST /api/auth/signup + POST /api/auth/login, JWT with 7d expiry |
 | **Mock Services** | | |
 | Package Setup | Done | express + nodemon installed |
-| server.js | Done | Express on port 3001, health check, route mounting |
-| data/mockData.js | Done | Flight offers, bookings, dictionaries, helpers |
-| routes/booking.js | Done | POST, GET, DELETE /flight-orders |
-| routes/passengers.js | Done | GET /:flightNumber/passengers |
+| server.js | Done | Express on port 3001, connects MongoDB before listen |
+| config/db.js | Done | Async connectDB() with error handling |
+| models/mockFlightOrders.js | Done | MockFlightOrder schema (orderId + orderData Mixed) |
+| scripts/seed.js | Done | Idempotent seed for MOCK-ORDER-1001 |
+| data/mockData.js | Done | Flight offers, dictionaries, helpers (bookings removed) |
+| routes/booking.js | Done | POST, GET, DELETE /flight-orders (MongoDB) |
+| routes/passengers.js | Done | GET /:flightNumber/passengers (MongoDB) |
 | **Frontend** | | |
 | Expo Chat Screen | Done | Wired to POST /api/chat |
 | React Native App | Done | Expo scaffold with chat UI |
@@ -97,19 +100,16 @@ This document is the single source of truth for the current state of the "Flight
 - `backend/server.js` — passport.initialize() + auth route mounting
 
 **Next steps:**
-1. Protect `get_passengers` tool with `requireAuth` + `requireRole('agent')`
-2. Migrate mock services from in-memory to MongoDB (needed for Vercel deployment — serverless is stateless)
-3. Deploy backend, mock services, and frontend to Vercel (free tier)
+1. Deploy backend, mock services, and frontend to Vercel (free tier)
 
 ## Notes for Gemini
 
-- Auth endpoints are COMPLETE and tested — signup + login working for both user and agent roles
-- Please update ARCHITECTURE.md: add auth flow (signup/login → JWT → protected routes)
-- Please update KANBAN.md: move "User Auth Endpoints" to Done
-- `get_passengers` protection with requireRole('agent') = next task
-- Mock services need migration from in-memory to MongoDB before Vercel deployment (serverless functions are stateless)
-- Vercel deployment planned for backend, mock services, and frontend (free tier)
-- Mock service still runs on port 3001, backend on 3000 — both required for full functionality
+- Mock services MongoDB migration COMPLETE — all endpoints tested with persistent data
+- MockFlightOrder model uses Mixed type for orderData (stores full Amadeus flight-order shape)
+- Seed script (`npm run seed`) inserts MOCK-ORDER-1001, idempotent
+- Same Atlas cluster as backend, collection: `mockflightorders`
+- CLAUDE.md added to project root — enforces guide-only mode for Claude
+- Next milestone: Vercel deployment (backend, mock services, frontend)
 
 ## Notes for Claude
 
