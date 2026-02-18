@@ -28,7 +28,7 @@ app.use(express.json());
 app.use('/api/health', require('./routes/health'));
 app.use('/api/flights', require('./routes/flights'));
 app.use('/api/chat', require('./routes/chat'));
-app.use('/api/auth', require('./routes/auth'));
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
