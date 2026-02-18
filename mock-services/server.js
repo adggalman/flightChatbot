@@ -5,6 +5,9 @@ const serviceAuth = require('./middleware/serviceAuth')
 // Import express
 const express = require('express');
 
+// Import connectDB
+const connectDB = require('./config/db');
+
 // Create Express app
 const app = express();
 
@@ -20,6 +23,12 @@ app.use('/mock-api/flights', require('./routes/passengers'));
 
 // Start the server
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+
+    });
+    
 });
+
+

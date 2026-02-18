@@ -36,7 +36,7 @@ const model = genAI.getGenerativeModel({
     },
     {
       name: 'retrieve_booking',
-      description: 'Get the details of the flight using provided ID',
+      description: 'Get the details of the flight using provided orderId',
       parameters: {
         type: 'OBJECT',
         properties: {
@@ -48,7 +48,7 @@ const model = genAI.getGenerativeModel({
     },
     {
       name: 'cancel_booking',
-      description: 'Cancel booking by ID',
+      description: 'Cancel booking by orderId',
       parameters: {
         type: 'OBJECT',
         properties: {
