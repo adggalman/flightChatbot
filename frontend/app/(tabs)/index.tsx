@@ -14,9 +14,11 @@ export default function ChatScreen() {
     setLoading(true);
 
     setMessages(prev => [...prev, userMessage]);
+    const loadingMessage = { id: 'loading', text: '...', sender: 'bot' };
+    setMessages(prev => [...prev, loadingMessage]);
     setInput('');
     try {
-      const response = await fetch('http://10.0.2.2:3000/api/chat', {
+      const response = await fetch('https://flightchatbot.vercel.app/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: currentInput, history: messages }),
@@ -32,7 +34,7 @@ export default function ChatScreen() {
       setMessages(prev => [...prev, errorMessage]);
 
     } finally {
-
+      setMessages(prev => prev.filter(m => m.id !== 'loading'));
       setLoading(false);
     }
   };
@@ -57,7 +59,7 @@ export default function ChatScreen() {
           placeholder="Type a message..."
           onSubmitEditing={sendMessage}
         />
-        <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
+        <TouchableOpacity style={[styles.sendButton, loading && { opacity: 0.5 }]} onPress={sendMessage} disabled={loading}>
           <Text style={styles.sendText}>Send</Text>
         </TouchableOpacity>
       </View>
