@@ -1,3 +1,8 @@
+// For sec
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
+
 // Import express
 const express = require('express');
 
@@ -16,6 +21,21 @@ require('./middleware/auth');
 
 // Create Express app
 const app = express();
+
+// Set security HTTP headers
+app.use(helmet());
+
+// Prevent HTTP parameter pollution
+app.use(hpp());
+
+// Rate limiting to prevent brute-force attacks
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+app.use('/api', limiter); // Apply limiter to all API routes
 
 // Init passport
 app.use(passport.initialize());
@@ -40,3 +60,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = app;
