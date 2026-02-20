@@ -1,0 +1,25 @@
+{
+  "name": "automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cucumber-js",
+    "test:flows": "npx cucumber-js --tags '@happy-path'",
+    "test:api": "npx cucumber-js --tags '@api-contracts'",
+    "report": "npx allure generate reports/allure/allure-results -o reports/allure/allure-report --clean",
+    "report:open": "npx allure open reports/allure/allure-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@cucumber/cucumber": "^11.3.0",
+    "axios": "^1.13.5",
+    "dotenv": "^17.3.1"
+  },
+  "devDependencies": {
+    "allure-commandline": "^2.36.0",
+    "allure-cucumberjs": "^3.4.5"
+  }
+}
