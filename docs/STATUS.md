@@ -4,16 +4,16 @@ This document is the single source of truth for the current state of the "Flight
 
 ## Current Sprint Status
 
-**Sprint Goal:** MongoDB migration for mock services — persistent storage for serverless deployment.
+**Sprint Goal:** Vercel deployment — backend, mock services, and frontend.
 
-**Current Step:** Migration complete. Mock services now use MockFlightOrder model in MongoDB. All endpoints tested and working.
+**Current Step:** Vercel prep in progress. Both server files export app, vercel.json created for backend and mock-services. Next: MongoDB Atlas IP whitelist, then deploy backend first.
 
 ## Built Components
 
 | Component | Status | Notes |
 |---|---|---|
 | **Backend** | | |
-| Express Server | Done | Port 3000, CORS, JSON parsing |
+| Express Server | Done | Port 3000, CORS, JSON parsing, helmet/hpp/rate-limit added |
 | MongoDB Connection | Done | Atlas cluster connected via mongoose |
 | Health Check | Done | GET /api/health |
 | Flight Search | Done | GET /api/flights/search → Amadeus proxy |
@@ -102,17 +102,49 @@ This document is the single source of truth for the current state of the "Flight
 **Next steps:**
 1. Deploy backend, mock services, and frontend to Vercel (free tier)
 
+## Vercel Deployment Plan (In Progress)
+
+### Step-by-step order
+1. **MongoDB Atlas** — set Network Access to allow all IPs (`0.0.0.0/0`) for Vercel dynamic IPs ← NEXT
+2. **Deploy backend** to Vercel — get deployed URL
+3. **Deploy mock-services** to Vercel — get deployed URL
+4. **Add env vars to Vercel** for each service (see list below)
+5. **Update frontend** API URL to point to deployed backend
+6. **Deploy frontend** to Vercel
+7. **CORS lock-down** — update backend CORS config with real frontend domain
+
+### Files added for Vercel
+- `backend/vercel.json` — routes all requests to server.js via @vercel/node
+- `mock-services/vercel.json` — same pattern
+- Both `server.js` files now export `app` (`module.exports = app`) at the bottom
+
+### Environment variables needed (Vercel dashboard)
+
+**Backend:**
+- `MONGODB_URI`
+- `JWT_SECRET`
+- `AMADEUS_CLIENT_ID`
+- `AMADEUS_CLIENT_SECRET`
+- `GEMINI_API_KEY`
+- `MOCK_SERVICE_URL` ← set after mock-services is deployed
+- `SERVICE_API_KEY`
+
+**Mock Services:**
+- `MONGODB_URI`
+- `SERVICE_API_KEY`
+
+### URL wiring
+- `backend/services/toolExecutors.js` already uses `process.env.BACKEND_URL` and `process.env.MOCK_SERVICE_URL` with localhost fallbacks — no code change needed, just set env vars in Vercel
+
 ## Notes for Gemini
 
-- Mock services MongoDB migration COMPLETE — all endpoints tested with persistent data
-- MockFlightOrder model uses Mixed type for orderData (stores full Amadeus flight-order shape)
-- Seed script (`npm run seed`) inserts MOCK-ORDER-1001, idempotent
-- Same Atlas cluster as backend, collection: `mockflightorders`
-- CLAUDE.md added to project root — enforces guide-only mode for Claude
-- Next milestone: Vercel deployment (backend, mock services, frontend)
+- Vercel deployment in progress — do NOT update KANBAN until deployment is confirmed working
+- Security hardening added to backend: helmet, hpp, express-rate-limit (100 req/15min on /api)
+- mock-services does NOT use security middleware — internal service protected by SERVICE_API_KEY only
+- CLAUDE.md in project root enforces guide-only mode for Claude
 
 ## Notes for Claude
 
 - User writes code, Claude reviews/guides only
 - Do NOT write files for the user — guide them step by step
-- Next session: user will share Amadeus response, study it together, then guide mockData.js implementation
+- Resume Vercel deployment: next step is MongoDB Atlas IP whitelist, then `vercel deploy` from backend/
