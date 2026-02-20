@@ -4,9 +4,9 @@ This document is the single source of truth for the current state of the "Flight
 
 ## Current Sprint Status
 
-**Sprint Goal:** Vercel deployment — backend, mock services, and frontend.
+**Sprint Goal:** Test automation framework — Cucumber.js + Allure + GitHub Actions + Linear.
 
-**Current Step:** Vercel prep in progress. Both server files export app, vercel.json created for backend and mock-services. Next: MongoDB Atlas IP whitelist, then deploy backend first.
+**Current Step:** Scaffold complete. Feature files written. Health check step definitions passing. Next: chat step definitions (handle Axios 4xx/5xx with try/catch).
 
 ## Built Components
 
