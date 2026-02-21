@@ -27,7 +27,7 @@ router.get('/:flightnumber/passengers', async (req, res) => {
             }
         }
         if (passengers.length === 0) return res.status(404).json({ error: 'No passengers found for this flight' });
-        res.json({ data: passengers });
+        res.json({ passengers: passengers });
     }
     catch {
         res.status(500).json({ error: 'Server error' })

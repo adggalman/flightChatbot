@@ -19,6 +19,7 @@
     "dotenv": "^17.3.1"
   },
   "devDependencies": {
+    "@cucumber/pretty-formatter": "^3.1.0",
     "allure-commandline": "^2.36.0",
     "allure-cucumberjs": "^3.4.5"
   }
