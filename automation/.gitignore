@@ -1,3 +1,4 @@
 reports/allure/allure-results/
 reports/allure/allure-report/
+reports/cucumber-report.json
 node_modules/

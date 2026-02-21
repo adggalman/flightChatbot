@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx cucumber-js",
+    "test": "npx cucumber-js --format json:reports/cucumber-report.json",
     "test:flows": "npx cucumber-js --tags '@happy-path'",
     "test:api": "npx cucumber-js --tags '@api-contracts'",
     "report": "npx allure generate reports/allure/allure-results -o reports/allure/allure-report --clean",
-    "report:open": "npx allure open reports/allure/allure-report"
+    "report:open": "npx allure open reports/allure/allure-report",
+    "linear": "node scripts/cucumber-to-linear.js"
   },
   "keywords": [],
   "author": "",

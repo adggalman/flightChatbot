@@ -1,6 +1,6 @@
 @api-contracts @passengers
 Feature: Passenger Endpoints
-
+  
   Scenario: Get passengers for a valid flight number
     Given a booking exists for flight "AK583"
     When I request passengers for flight "AK583"

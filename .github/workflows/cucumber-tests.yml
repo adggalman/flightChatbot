@@ -5,6 +5,12 @@ on:
       branches: [main]
     pull_request:
       branches: [main]
+    workflow_dispatch:
+      inputs:
+        create_linear_tickets:
+          description: 'Create Linear tickets for this run'
+          type: boolean
+          default: false
 
 permissions:
     contents: write
@@ -29,9 +35,15 @@ jobs:
         - name: Run Cucumber tests
           working-directory: automation
           env:
-            BACKEND_URL: ${{ secrets.BACKEND_URL }}
-            MOCK_SERVICE_URL: ${{ secrets.MOCK_SERVICE_URL }}
-            SERVICE_API_KEY: ${{ secrets.SERVICE_API_KEY }}
+              BACKEND_URL: ${{ secrets.BACKEND_URL }}
+              MOCK_SERVICE_URL: ${{ secrets.MOCK_SERVICE_URL }}
+              SERVICE_API_KEY: ${{ secrets.SERVICE_API_KEY }}
+              LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+              LINEAR_TEAM_ID: ${{ secrets.LINEAR_TEAM_ID }}
+              LINEAR_STATE_IN_PROGRESS: ${{ secrets.LINEAR_STATE_IN_PROGRESS }}
+              LINEAR_STATE_DONE: ${{ secrets.LINEAR_STATE_DONE }}
+              LINEAR_STATE_CANCELED: ${{ secrets.LINEAR_STATE_CANCELED }}
+              CREATE_LINEAR_TICKETS: ${{ inputs.create_linear_tickets || 'false' }}
           run: npm test
 
         - name: Generate Allure report

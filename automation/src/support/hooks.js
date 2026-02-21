@@ -1,6 +1,5 @@
 const { BeforeAll, AfterAll, Before, After } = require('@cucumber/cucumber');
 
-// Session state — shared across steps in a flow
 global.sessionState = {};
 
 BeforeAll(async () => {
@@ -12,11 +11,11 @@ AfterAll(async () => {
     global.sessionState = {};
 });
 
-Before(async (scenario) => {
+Before(async function (scenario) {
     console.log(`Starting: ${scenario.pickle.name}`);
 });
 
-After(async (scenario) => {
+After(async function (scenario) {
     if (scenario.result.status === 'FAILED') {
         console.log(`FAILED: ${scenario.pickle.name}`);
     }
