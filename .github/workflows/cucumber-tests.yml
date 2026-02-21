@@ -81,8 +81,8 @@ jobs:
           if: always()
           run: |
             cp -r automation/reports/allure/allure-report /tmp/allure-snapshot
-            mkdir -p automation/reports/allure/allure-report/reports/ci-${{ github.run_number }}
-            cp -r /tmp/allure-snapshot/. automation/reports/allure/allure-report/reports/ci- ${{github.run_number }}/
+            mkdir -p automation/reports/allure/allure-report/reports
+            cp -r /tmp/allure-snapshot "automation/reports/allure/allure-report/reports/ci-${{ github.run_number }}"
           
         - name: Generate historical runs index
           if: always()
