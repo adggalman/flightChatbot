@@ -1,6 +1,6 @@
 "BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
 "0","","0","Booking Endpoints","4","0","","0"
 "0","","0","Health Check","1","0","","0"
-"0","","0","Chat Endpoint","2","0","","0"
-"0","","0","Passenger Endpoints","2","0","","0"
 "0","","0","Flight Booking Happy Path","1","0","","0"
+"0","","0","Passenger Endpoints","2","0","","0"
+"0","","0","Chat Endpoint","2","0","","0"
