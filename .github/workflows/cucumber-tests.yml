@@ -45,6 +45,18 @@ jobs:
               LINEAR_STATE_CANCELED: ${{ secrets.LINEAR_STATE_CANCELED }}
               CREATE_LINEAR_TICKETS: ${{ inputs.create_linear_tickets || 'false' }}
           run: npm test
+        
+        - name: Create Linear tickets
+          if: always() && inputs.create_linear_tickets == 'true'
+          working-directory: automation
+          env:
+              LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+              LINEAR_TEAM_ID: ${{ secrets.LINEAR_TEAM_ID }}
+              LINEAR_STATE_IN_PROGRESS: ${{ secrets.LINEAR_STATE_IN_PROGRESS }}
+              LINEAR_STATE_DONE: ${{ secrets.LINEAR_STATE_DONE }}
+              LINEAR_STATE_CANCELED: ${{ secrets.LINEAR_STATE_CANCELED }}
+              CREATE_LINEAR_TICKETS: 'true'
+          run: npm run linear
 
         - name: Generate Allure report
           if: always()
