@@ -1,0 +1,44 @@
+name: Cucumber Tests
+
+on:
+    push:
+      branches: [main]
+    pull_request:
+      branches: [main]
+
+jobs:
+    test:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: '20'
+
+        - name: Install dependencies
+          working-directory: automation
+          run: npm install
+
+        - name: Run Cucumber tests
+          working-directory: automation
+          env:
+            BACKEND_URL: ${{ secrets.BACKEND_URL }}
+            MOCK_SERVICE_URL: ${{ secrets.MOCK_SERVICE_URL }}
+            SERVICE_API_KEY: ${{ secrets.SERVICE_API_KEY }}
+          run: npm test
+
+        - name: Generate Allure report
+          if: always()
+          working-directory: automation
+          run: npm run report
+
+        - name: Deploy to GitHub Pages
+          if: always()
+          uses: peaceiris/actions-gh-pages@v4
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: automation/reports/allure/allure-report
