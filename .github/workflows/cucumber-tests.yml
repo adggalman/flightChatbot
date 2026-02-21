@@ -58,6 +58,20 @@ jobs:
               CREATE_LINEAR_TICKETS: 'true'
           run: npm run linear
 
+        - name: Get Allure history
+          if: always()
+          uses: actions/checkout@v4
+          with:
+            ref: gh-pages
+            path: gh-pages
+            fetch-depth: 1
+        
+        - name: Copy Allure history
+          if: always()
+          run: |
+            mkdir -p automation/reports/allure/allure-results/history
+            cp -r gh-pages/history/. automation/reports/allure/allure-results/history/ 2>/dev/null || true
+
         - name: Generate Allure report
           if: always()
           working-directory: automation
