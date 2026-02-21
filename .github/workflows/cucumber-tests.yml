@@ -47,7 +47,7 @@ jobs:
           run: npm test
         
         - name: Create Linear tickets
-          if: always() && inputs.create_linear_tickets == 'true'
+          if: always() && inputs.create_linear_tickets
           working-directory: automation
           env:
               LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
