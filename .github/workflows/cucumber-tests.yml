@@ -76,6 +76,20 @@ jobs:
           if: always()
           working-directory: automation
           run: npm run report
+        
+        - name: Copy report to run subfolder
+          if: always()
+          run: |
+            cp -r automation/reports/allure/allure-report /tmp/allure-snapshot
+            mkdir -p automation/reports/allure/allure-report/reports/ci-${{ github.run_number }}
+            cp -r /tmp/allure-snapshot/. automation/reports/allure/allure-report/reports/ci- ${{github.run_number }}/
+          
+        - name: Generate historical runs index
+          if: always()
+          working-directory: automation
+          env:
+            CREATE_LINEAR_TICKETS: ${{ inputs.create_linear_tickets || 'false' }}
+          run: npm run generate-index
 
         - name: Deploy to GitHub Pages
           if: always()
@@ -83,3 +97,4 @@ jobs:
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             publish_dir: automation/reports/allure/allure-report
+            keep_files: true

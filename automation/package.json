@@ -8,7 +8,8 @@
     "test:api": "npx cucumber-js --tags '@api-contracts'",
     "report": "npx allure generate reports/allure/allure-results -o reports/allure/allure-report --clean",
     "report:open": "npx allure open reports/allure/allure-report",
-    "linear": "node scripts/cucumber-to-linear.js"
+    "linear": "node scripts/cucumber-to-linear.js",
+    "generate-index": "node scripts/generate-index.js"
   },
   "keywords": [],
   "author": "",
