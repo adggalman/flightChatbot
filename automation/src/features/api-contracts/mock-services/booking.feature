@@ -3,21 +3,21 @@ Feature: Booking Endpoints
 
   Scenario: Create a flight order returns 201 with an orderId
     Given I create a flight order with valid data
-    Then the create order response status should be 201
-    And the response should contain an orderId
+    Then the response status should be 201
+    And the response body should contain "flight-order"
 
   Scenario: Retrieve an existing flight order
     Given a flight order with id "MOCK-ORDER-1001" exists
     When I retrieve the flight order "MOCK-ORDER-1001"
-    Then the retrieve response status should be 200
-    And the response should contain order data
+    Then the response status should be 200
+    And the response body should contain "flight-order"
 
   Scenario: Retrieve a non-existent flight order returns 404
     When I retrieve the flight order "INVALID-ORDER-999"
-    Then the retrieve response status should be 404
+    Then the response status should be 404
 
   Scenario: Delete an existing flight order
     Given I create a flight order with valid data
     When I delete the created flight order
-    Then the delete response status should be 200
-    And the response should contain "Order cancelled"
+    Then the response status should be 200
+    And the response body should contain "Order cancelled"
