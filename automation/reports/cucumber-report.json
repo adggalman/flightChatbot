@@ -1,0 +1,1015 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "chat-endpoint;chat-returns-a-response-for-a-valid-message",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Chat returns a response for a valid message",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 154042
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I send a chat message \"hello\"",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2241476584
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 6,
+            "name": "the response status should be 200",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 241250
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "the response body should contain \"reply\"",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 252834
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 166082
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 159458
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@api-contracts",
+            "line": 1
+          },
+          {
+            "name": "@chat",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "chat-endpoint;chat-returns-400-for-an-empty-message",
+        "keyword": "Scenario",
+        "line": 9,
+        "name": "Chat returns 400 for an empty message",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 257124
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 10,
+            "name": "I send a chat message \"\"",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 313802666
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "the response status should be 400",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 128083
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 74583
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 100457
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@api-contracts",
+            "line": 1
+          },
+          {
+            "name": "@chat",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "chat-endpoint",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Chat Endpoint",
+    "tags": [
+      {
+        "name": "@api-contracts",
+        "line": 1
+      },
+      {
+        "name": "@chat",
+        "line": 1
+      }
+    ],
+    "uri": "src/features/api-contracts/backend/chat.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "health-check;backend-health-check-returns-ok",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Backend health check returns ok",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 144083
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "the backend is running",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 354866250
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 6,
+            "name": "the response status should be 200",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 150249
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "the response body should contain \"OK\"",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 96833
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 42915
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 27416
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@api-contracts",
+            "line": 1
+          },
+          {
+            "name": "@health",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "health-check",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Health Check",
+    "tags": [
+      {
+        "name": "@api-contracts",
+        "line": 1
+      },
+      {
+        "name": "@health",
+        "line": 1
+      }
+    ],
+    "uri": "src/features/api-contracts/backend/health.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "booking-endpoints;create-a-flight-order-returns-201-with-an-orderid",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Create a flight order returns 201 with an orderId",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 304458
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I create a flight order with valid data",
+            "match": {
+              "location": "src/features/step-definitions/mockSteps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4781809041
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 6,
+            "name": "the response status should be 201",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 134791
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "the response body should contain \"flight-order\"",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 81333
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 32584
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 525261582
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@api-contracts",
+            "line": 1
+          },
+          {
+            "name": "@booking",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "booking-endpoints;retrieve-an-existing-flight-order",
+        "keyword": "Scenario",
+        "line": 9,
+        "name": "Retrieve an existing flight order",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 133875
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 10,
+            "name": "a flight order with id \"MOCK-ORDER-1001\" exists",
+            "match": {
+              "location": "src/features/step-definitions/mockSteps.js:34"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 530731374
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "I retrieve the flight order \"MOCK-ORDER-1001\"",
+            "match": {
+              "location": "src/features/step-definitions/mockSteps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 540241125
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "the response status should be 200",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 170667
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "the response body should contain \"flight-order\"",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 134291
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 39375
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 37416
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@api-contracts",
+            "line": 1
+          },
+          {
+            "name": "@booking",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "booking-endpoints;retrieve-a-non-existent-flight-order-returns-404",
+        "keyword": "Scenario",
+        "line": 15,
+        "name": "Retrieve a non-existent flight order returns 404",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 184915
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 16,
+            "name": "I retrieve the flight order \"INVALID-ORDER-999\"",
+            "match": {
+              "location": "src/features/step-definitions/mockSteps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 524810459
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "the response status should be 404",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 94999
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 34583
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 36167
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@api-contracts",
+            "line": 1
+          },
+          {
+            "name": "@booking",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "booking-endpoints;delete-an-existing-flight-order",
+        "keyword": "Scenario",
+        "line": 19,
+        "name": "Delete an existing flight order",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 481166
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "I create a flight order with valid data",
+            "match": {
+              "location": "src/features/step-definitions/mockSteps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 506689542
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "I delete the created flight order",
+            "match": {
+              "location": "src/features/step-definitions/mockSteps.js:50"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 556576708
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "the response status should be 200",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 90500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "the response body should contain \"Order cancelled\"",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 98916
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30416
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 507403540
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@api-contracts",
+            "line": 1
+          },
+          {
+            "name": "@booking",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "booking-endpoints",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Booking Endpoints",
+    "tags": [
+      {
+        "name": "@api-contracts",
+        "line": 1
+      },
+      {
+        "name": "@booking",
+        "line": 1
+      }
+    ],
+    "uri": "src/features/api-contracts/mock-services/booking.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "passenger-endpoints;get-passengers-for-a-valid-flight-number",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Get passengers for a valid flight number",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 219874
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "a booking exists for flight \"AK583\"",
+            "match": {
+              "location": "src/features/step-definitions/mockSteps.js:58"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 514194625
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "I request passengers for flight \"AK583\"",
+            "match": {
+              "location": "src/features/step-definitions/mockSteps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 494949875
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "the response status should be 200",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 92542
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "the response body should contain \"passengers\"",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 64249
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 28291
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 22709
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@api-contracts",
+            "line": 1
+          },
+          {
+            "name": "@passengers",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "passenger-endpoints;get-passengers-for-unknown-flight-returns-404",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Get passengers for unknown flight returns 404",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 100292
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "I request passengers for flight \"XX999\"",
+            "match": {
+              "location": "src/features/step-definitions/mockSteps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 532974083
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "the response status should be 404",
+            "match": {
+              "location": "src/features/step-definitions/backendSteps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 86374
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30749
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 24707
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@api-contracts",
+            "line": 1
+          },
+          {
+            "name": "@passengers",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "passenger-endpoints",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Passenger Endpoints",
+    "tags": [
+      {
+        "name": "@api-contracts",
+        "line": 1
+      },
+      {
+        "name": "@passengers",
+        "line": 1
+      }
+    ],
+    "uri": "src/features/api-contracts/mock-services/passengers.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "flight-booking-happy-path;user-searches,-books,-retrieves-and-cancels-a-flight",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "User searches, books, retrieves and cancels a flight",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 190125
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I search for flights from \"MNL\" to \"CEB\"",
+            "match": {
+              "location": "src/features/step-definitions/flowSteps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2088066375
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 6,
+            "name": "the flight search should return results",
+            "match": {
+              "location": "src/features/step-definitions/flowSteps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 635374
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "I create a flight order with the first result",
+            "match": {
+              "location": "src/features/step-definitions/flowSteps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 563292875
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "the order should be created with an orderId",
+            "match": {
+              "location": "src/features/step-definitions/flowSteps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 174708
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "I retrieve the created order",
+            "match": {
+              "location": "src/features/step-definitions/flowSteps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 497728750
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "the order details should be returned",
+            "match": {
+              "location": "src/features/step-definitions/flowSteps.js:50"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 134167
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 14,
+            "name": "I cancel the created order",
+            "match": {
+              "location": "src/features/step-definitions/flowSteps.js:54"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 524155707
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 15,
+            "name": "the order should be cancelled successfully",
+            "match": {
+              "location": "src/features/step-definitions/flowSteps.js:62"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 267874
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "I retrieve the cancelled order",
+            "match": {
+              "location": "src/features/step-definitions/flowSteps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 503760417
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "the response should return 404",
+            "match": {
+              "location": "src/features/step-definitions/flowSteps.js:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110541
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 34708
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 496205459
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@happy-path",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "flight-booking-happy-path",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Flight Booking Happy Path",
+    "tags": [
+      {
+        "name": "@happy-path",
+        "line": 1
+      }
+    ],
+    "uri": "src/features/flows/happy-path/flight-booking.feature"
+  }
+]

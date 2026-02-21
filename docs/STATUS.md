@@ -1,150 +1,205 @@
 # Project Status
 
-This document is the single source of truth for the current state of the "Flight Booking Automation Showcase" project. It serves as the handoff document between Gemini (documentation/architecture) and Claude (implementation guidance).
+Handoff document between Claude (implementation guidance) and Gemini (documentation/architecture). Claude updates this after each session. Gemini reads this before working on docs tasks.
 
-## Current Sprint Status
+---
 
-**Sprint Goal:** Test automation framework — Cucumber.js + Allure + GitHub Actions + Linear.
+## Current Sprint
 
-**Current Step:** Scaffold complete. Feature files written. Health check step definitions passing. Next: chat step definitions (handle Axios 4xx/5xx with try/catch).
+**Goal:** Complete Linear CI integration → Allure history → Boilerplate branch → README final pass
+
+**Last completed:** Linear post-processing integration — tickets auto-created on manual CI trigger, Allure results patched with Linear issue links.
+
+**In progress:** Verifying CI Linear integration (manual trigger running now)
+
+**Up next:**
+1. Allure history (carry `history/` folder across CI runs on gh-pages)
+2. Boilerplate branch setup
+3. README final pass (Gemini task — see below)
+
+---
 
 ## Built Components
 
 | Component | Status | Notes |
 |---|---|---|
 | **Backend** | | |
-| Express Server | Done | Port 3000, CORS, JSON parsing, helmet/hpp/rate-limit added |
-| MongoDB Connection | Done | Atlas cluster connected via mongoose |
-| Health Check | Done | GET /api/health |
-| Flight Search | Done | GET /api/flights/search → Amadeus proxy |
-| Amadeus Client | Done | SDK initialized with env credentials |
-| User Model | Done | Mongoose schema (email, password, name, role) + bcrypt hashing + comparePassword |
-| Booking Model | Done | Mongoose schema (userId, flightDetails, pnr, status) |
-| Auth Middleware | Done | Passport JWT strategy + requireAuth + requireRole('agent') |
-| LLM Service | Done | Gemini function calling with tool execution loop |
-| Tool Executors | Done | HTTP calls to backend + mock-service endpoints |
-| User Auth Endpoints | Done | POST /api/auth/signup + POST /api/auth/login, JWT with 7d expiry |
+| Express Server | ✅ Done | Port 3000, CORS, JSON parsing, helmet/hpp/rate-limit |
+| MongoDB Connection | ✅ Done | Atlas cluster via mongoose |
+| Health Check | ✅ Done | GET /api/health |
+| Flight Search | ✅ Done | GET /api/flights/search → Amadeus proxy |
+| Amadeus Client | ✅ Done | SDK initialized with env credentials |
+| User Model | ✅ Done | email, password, name, role + bcrypt + comparePassword |
+| Booking Model | ✅ Done | userId, flightDetails, pnr, status |
+| Auth Middleware | ✅ Done | Passport JWT + requireAuth + requireRole('agent') |
+| Auth Endpoints | ✅ Done | POST /api/auth/signup + POST /api/auth/login, JWT 7d |
+| LLM Service | ✅ Done | Gemini function calling, 5-iteration loop |
+| Tool Executors | ✅ Done | HTTP calls to backend + mock-service endpoints |
+| Chat Endpoint | ✅ Done | POST /api/chat — protected, rate-limited 20/15min |
 | **Mock Services** | | |
-| Package Setup | Done | express + nodemon installed |
-| server.js | Done | Express on port 3001, connects MongoDB before listen |
-| config/db.js | Done | Async connectDB() with error handling |
-| models/mockFlightOrders.js | Done | MockFlightOrder schema (orderId + orderData Mixed) |
-| scripts/seed.js | Done | Idempotent seed for MOCK-ORDER-1001 |
-| data/mockData.js | Done | Flight offers, dictionaries, helpers (bookings removed) |
-| routes/booking.js | Done | POST, GET, DELETE /flight-orders (MongoDB) |
-| routes/passengers.js | Done | GET /:flightNumber/passengers (MongoDB) |
+| server.js | ✅ Done | Express port 3001, MongoDB before listen |
+| config/db.js | ✅ Done | Async connectDB() with error handling |
+| models/MockFlightOrder.js | ✅ Done | orderId + orderData (Mixed) + timestamps |
+| scripts/seed.js | ✅ Done | Idempotent seed for MOCK-ORDER-1001 |
+| data/mockData.js | ✅ Done | Flight offers, dictionaries, helpers (no bookings array) |
+| routes/booking.js | ✅ Done | POST/GET/DELETE /flight-orders (MongoDB) |
+| routes/passengers.js | ✅ Done | GET /:flightNumber/passengers (MongoDB) |
+| Service Auth | ✅ Done | x-service-key header on all mock routes |
 | **Frontend** | | |
-| Expo Chat Screen | Done | Wired to POST /api/chat |
-| React Native App | Done | Expo scaffold with chat UI |
+| Expo Chat Screen | ✅ Done | Wired to POST /api/chat |
+| Loading animation | ✅ Done | Disabled send during bot reply |
+| **Deployment** | | |
+| Backend on Vercel | ✅ Done | https://flightchatbot.vercel.app |
+| Mock Services on Vercel | ✅ Done | https://mock-services-beta.vercel.app |
 | **Automation** | | |
-| Cucumber Features | Not Started | |
-| Step Definitions | Not Started | |
-| Appium Config | Not Started | |
+| Cucumber scaffold | ✅ Done | Features, step defs, helpers, hooks |
+| Feature files | ✅ Done | health, chat, booking, passengers, happy-path flow |
+| Step definitions | ✅ Done | backendSteps.js, mockSteps.js, flowSteps.js |
+| apiHelpers.js | ✅ Done | Axios clients for backend + mock-service |
+| Test data cleanup | ✅ Done | After hook deletes created orders in MongoDB |
+| Tag conventions | ✅ Done | @api-contracts, @happy-path, @local, @wip |
+| Allure reporting | ✅ Done | allure-cucumberjs, report:open, GitHub Pages |
+| GitHub Actions | ✅ Done | Push/PR auto-run + manual dispatch |
+| **Linear Integration** | | |
+| linearHelper.js | ✅ Done | GraphQL: createLabel, createIssue, updateIssueStatus, addComment |
+| cucumber-to-linear.js | ✅ Done | Post-processing script — reads cucumber-report.json, creates tickets, patches allure results |
+| CI flag | ✅ Done | workflow_dispatch boolean `create_linear_tickets` |
+| Allure ↔ Linear link | ✅ Done | Allure result JSON patched with Linear issue URL |
+| **Pending** | | |
+| Allure history | ⏳ Pending | Carry history/ folder across CI runs |
+| Boilerplate branch | ⏳ Pending | Empty scaffold for learners |
 
-## Amadeus Response Shapes (captured in docs/)
+---
 
-| File | Endpoint | Notes |
-|---|---|---|
-| `flightOffersSearch.json` | GET /v2/shopping/flight-offers | SYD→BKK, 2 adults, 5 results |
-| `flightCreateOrdersRequest.json` | POST /v1/booking/flight-orders (req) | Traveler shape with documents |
-| `flightCreateOrdersResponse.json` | POST /v1/booking/flight-orders (res) | Adds order ID, PNR, co2 |
-| `flightOrder.json` | GET /v1/booking/flight-orders/:id | Adds bookingStatus, isFlown |
-| `paxManifest.json` | Internal airline API (reference only) | DO NOT COMMIT — proprietary |
+## Architecture
 
-## Mock Endpoints (Final)
+```
+Mobile (Expo) → POST /api/chat
+                    ↓
+             Backend (Express)
+             ├── Gemini LLM (function calling)
+             │   └── toolExecutors.js
+             │       ├── GET /api/flights/search → Amadeus API
+             │       ├── GET/DELETE /mock-api/booking/flight-orders/:id
+             │       └── GET /mock-api/flights/:flightNumber/passengers
+             └── MongoDB Atlas (users, bookings)
 
-1. `POST /mock-api/booking/flight-orders` — create order
-2. `GET /mock-api/booking/flight-orders/:id` — retrieve order
-3. `DELETE /mock-api/booking/flight-orders/:id` — cancel order
-4. `GET /mock-api/flights/:flightNumber/passengers` — passenger list (custom)
+Mock Services (Express) ← x-service-key auth
+└── MongoDB Atlas (mockflightorders collection)
 
-**Move/change flight** = delete order → search (live Amadeus) → create new order. No custom endpoint needed.
+CI/CD (GitHub Actions)
+├── npm test → cucumber-report.json + allure-results/
+├── npm run linear → Linear tickets + allure patches (manual only)
+├── npm run report → allure-report/
+└── Deploy → GitHub Pages (https://adggalman.github.io/flightChatbot/)
+```
 
-## Workflow for Mock Data
+---
 
-1. ~~User calls real Amadeus Flight Offers Search via Postman~~ Done
-2. ~~User and Claude study the response shape together~~ Done
-3. ~~User builds mockData.js using real response as template~~ Done
-4. ~~User implements mock routes (booking, passengers)~~ Done
-5. ~~User implements server.js to wire it all together~~ Done
+## Linear Integration — How It Works
 
-## Gemini Function Calling (New)
+**Pattern:** Post-processing (mirrors AirAsia Xray CI pattern)
 
-**Tools wired (4):**
-- `search_flights` → calls `GET /api/flights/search` (Amadeus, same backend)
-- `retrieve_booking` → calls `GET /mock-api/booking/flight-orders/:id` (mock-service)
-- `cancel_booking` → calls `DELETE /mock-api/booking/flight-orders/:id` (mock-service)
-- `get_passengers` → calls `GET /mock-api/flights/:flightNumber/passengers` (mock-service)
+```
+CI run → npm test → cucumber-report.json
+       → npm run linear (if create_linear_tickets=true)
+           ├── Creates run label: ci-#N or local-YYYY-MM-DD-HH:MM
+           ├── Per scenario: createIssue → updateIssueStatus (Done/Cancelled)
+           └── Patches allure-results/*.json with Linear issue link
+       → npm run report (picks up patched allure results)
+       → Deploy to GitHub Pages (Allure shows Linear link in test detail)
+```
 
-**Deferred:** `create_booking` — needs flight offer ID + traveler details, will add once pattern is solid.
+**Key files:**
+- `automation/scripts/cucumber-to-linear.js` — main post-processor
+- `automation/src/helpers/linearHelper.js` — GraphQL API wrapper
+- `automation/src/support/hooks.js` — logging only (Linear removed)
+- `.github/workflows/cucumber-tests.yml` — Linear step between test + report
 
-**Files:**
-- `backend/services/llmService.js` — tool schemas + execution loop (max 5 iterations)
-- `backend/services/toolExecutors.js` — HTTP calls to backend + mock-service
-- System prompt includes dynamic date so Gemini knows current year
+**Env vars needed:** LINEAR_API_KEY, LINEAR_TEAM_ID, LINEAR_STATE_IN_PROGRESS, LINEAR_STATE_DONE, LINEAR_STATE_CANCELED
 
-## User Auth (New)
+---
 
-**Endpoints:**
-- `POST /api/auth/signup` — creates user, returns JWT (accepts optional `role: 'agent'`)
-- `POST /api/auth/login` — validates credentials, returns JWT
+## Allure History (Next Claude Task)
 
-**JWT payload:** `{ id, role }` — 7-day expiry, signed with JWT_SECRET
+**Problem:** Each CI run deploys a fresh Allure report — no trend history.
 
-**Roles:** `user` (default), `agent` — enforced via `requireRole()` middleware
+**Fix:** Before `npm run report`, copy `history/` from the previous gh-pages deployment into `allure-results/history/`. Allure picks it up automatically.
 
-**Files:**
-- `backend/routes/auth.js` — signup + login routes
-- `backend/models/User.js` — role field, bcrypt pre-save hook, comparePassword method
-- `backend/middleware/auth.js` — requireAuth (Passport JWT) + requireRole
-- `backend/server.js` — passport.initialize() + auth route mounting
+**Workflow change needed in `cucumber-tests.yml`:**
+1. Checkout gh-pages branch into a temp folder
+2. Copy `gh-pages/history → allure-results/history/` (safe to fail on first run)
+3. Then run `npm run report` as usual
 
-**Next steps:**
-1. Deploy backend, mock services, and frontend to Vercel (free tier)
+---
 
-## Vercel Deployment Plan (In Progress)
+## Gemini TODO
 
-### Step-by-step order
-1. **MongoDB Atlas** — set Network Access to allow all IPs (`0.0.0.0/0`) for Vercel dynamic IPs ← NEXT
-2. **Deploy backend** to Vercel — get deployed URL
-3. **Deploy mock-services** to Vercel — get deployed URL
-4. **Add env vars to Vercel** for each service (see list below)
-5. **Update frontend** API URL to point to deployed backend
-6. **Deploy frontend** to Vercel
-7. **CORS lock-down** — update backend CORS config with real frontend domain
+These are discrete, specific tasks. Do NOT copy-paste from this file into README — interpret and write in your own words with proper markdown formatting.
 
-### Files added for Vercel
-- `backend/vercel.json` — routes all requests to server.js via @vercel/node
-- `mock-services/vercel.json` — same pattern
-- Both `server.js` files now export `app` (`module.exports = app`) at the bottom
+### Task 1 — Update README: Linear Integration section
 
-### Environment variables needed (Vercel dashboard)
+Add a new section to README.md called `## Linear Integration` after the CI/CD section. Include:
+- What Linear is and why it's used (project tracking, auto ticket management)
+- The post-processing pattern (diagram or numbered steps): tests run → cucumber-report.json → script creates tickets → status auto-updated → Allure report linked
+- Screenshot placeholder: `![Linear tickets grouped by run label](docs/screenshots/linear-tickets.png)` (placeholder, user will add screenshot)
+- How to trigger: GitHub Actions → Cucumber Tests → Run workflow → check "Create Linear tickets"
+- The label convention: `ci-#N` for CI runs, `local-YYYY-MM-DD-HH:MM` for local runs
+- Link to Allure report showing the Linear issue link in test detail
 
-**Backend:**
-- `MONGODB_URI`
-- `JWT_SECRET`
-- `AMADEUS_CLIENT_ID`
-- `AMADEUS_CLIENT_SECRET`
-- `GEMINI_API_KEY`
-- `MOCK_SERVICE_URL` ← set after mock-services is deployed
-- `SERVICE_API_KEY`
+### Task 2 — Update README: QA Showcase Highlights section
 
-**Mock Services:**
-- `MONGODB_URI`
-- `SERVICE_API_KEY`
+The current highlights list is incomplete. Rewrite it to include:
+- BDD feature files (Gherkin) — API contracts + E2E happy-path flow
+- Reusable step definitions with generic status/body assertions
+- Auto-cleanup of test data via Cucumber After hooks (prevents DB pollution)
+- On-demand Linear ticket creation + auto status update via GraphQL API
+- Allure ↔ Linear bidirectional linking (test report links to ticket, ticket links to report)
+- Run-labeled grouping in Linear (each CI run gets its own label)
+- Environment-aware tagging (`@local`, `@wip`) — rate-limit test excluded from CI
+- Allure report published to GitHub Pages on every CI push
 
-### URL wiring
-- `backend/services/toolExecutors.js` already uses `process.env.BACKEND_URL` and `process.env.MOCK_SERVICE_URL` with localhost fallbacks — no code change needed, just set env vars in Vercel
+### Task 3 — Update README: Step 11 (Linear)
 
-## Notes for Gemini
+In the "How We Built This" section, Step 11 currently says "(In Progress)". Update it to Done and expand:
+- Chose post-processing over hooks-based approach (mirrors AirAsia Xray pattern)
+- `linearHelper.js` — GraphQL mutations with variables (not string interpolation — avoids injection)
+- `cucumber-to-linear.js` — reads cucumber-report.json, creates tickets, patches allure result JSON files
+- `workflow_dispatch` boolean flag for on-demand ticket creation (not on every push)
+- Allure result patching adds `links` array to result JSON → shows as "Links" in Allure report
 
-- Vercel deployment in progress — do NOT update KANBAN until deployment is confirmed working
-- Security hardening added to backend: helmet, hpp, express-rate-limit (100 req/15min on /api)
-- mock-services does NOT use security middleware — internal service protected by SERVICE_API_KEY only
-- CLAUDE.md in project root enforces guide-only mode for Claude
+### Task 4 — Fix ARCHITECTURE.md diagram
+
+The ASCII diagram in `docs/ARCHITECTURE.md` has two bugs to fix:
+
+1. The middle box is labeled `(Proxy)` — change it to `Backend Service` (it's the same backend, no need for a separate proxy box). The correct flow is: Backend → Gemini LLM → toolExecutors → Amadeus API. Redraw to show this clearly.
+2. The `Mock Flight Ops API` box is missing its closing `+-----+` border line — the box is incomplete.
+3. The bullet-point descriptions at the bottom are accidentally inside the code block (before the closing triple-backtick) — move them outside.
+
+Correct architecture flow for the diagram:
+```
+Mobile (Expo) → Backend (Express)
+                    ├── Gemini AI (function calling) → Amadeus Travel API
+                    ├── MongoDB Atlas
+                    └── Mock Services (Express) → MongoDB Atlas
+Cucumber.js Tests → Backend + Mock Services (API contract tests)
+GitHub Actions → Allure → GitHub Pages
+```
+
+### Task 5 — Review and clean up README top section
+
+Check that the README currently has:
+- The `⚠️ Start from the boilerplate branch` callout at the top
+- Live links section with current URLs
+- Correct GitHub Actions badge (if badge exists, verify URL is correct)
+
+If any of these are missing or outdated, fix them.
+
+---
 
 ## Notes for Claude
 
-- User writes code, Claude reviews/guides only
-- Do NOT write files for the user — guide them step by step
-- Resume Vercel deployment: next step is MongoDB Atlas IP whitelist, then `vercel deploy` from backend/
+- Default mode: guide only, no code writes
+- Allure history is next implementation task
+- After Allure history: boilerplate branch setup
+- Linear integration is complete — update MEMORY.md after confirming CI works
