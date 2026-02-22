@@ -1,11 +1,18 @@
 const express = require('express');
 const { chat } = require('../services/llmService');
-const { requireAuth } = require('../middleware/auth');
+const passport = require('passport');
+
+const optionalAuth = (req, res, next) => {
+  passport.authenticate('jwt', { session: false }, (err, user) => {
+    req.user = user || { role: 'user' };
+    next();
+  })(req, res, next);
+};
 
 const router = express.Router();
 
 // POST /api/chat
-router.post('/', requireAuth, async (req, res) => {
+router.post('/', optionalAuth, async (req, res) => {
   const { message, history } = req.body;
 
   if (!message) {
