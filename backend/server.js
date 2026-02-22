@@ -21,6 +21,7 @@ require('./middleware/auth');
 
 // Create Express app
 const app = express();
+app.set('trust proxy', 1);
 
 // Set security HTTP headers
 app.use(helmet());
