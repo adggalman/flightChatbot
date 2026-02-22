@@ -12,7 +12,6 @@ const SYSTEM_PROMPT = `You are a flight booking assistant. You can help users wi
   - Today's date is ${new Date().toISOString().split('T')[0]}.
 
   You CANNOT look up bookings by e-ticket number, frequent flyer number, or passenger name.
-  Note: Flight booking creation is not yet available. You can search but cannot create new bookings yet.
   If a user wants to retrieve or manage a booking, ask for their order ID or PNR (6-character code).
   Be concise and helpful.`
 
@@ -56,6 +55,26 @@ const model = genAI.getGenerativeModel({
         },
         required: ['orderId']
       },
+    },
+    {
+      name: 'create_booking',
+      description: 'Create a flight booking with selected flight offer and traveler details',
+      parameters: {
+        type: 'OBJECT',
+        properties: {
+          travelers: {
+            type: 'ARRAY',
+            description: 'List of travelers, each with id (string) and name (firstName, lastName)',
+            items: { type: 'OBJECT' }
+          },
+          flightOffers: {
+            type: 'ARRAY',
+            description: 'Flight offer(s) selected from search results',
+            items: { type: 'OBJECT' }
+          }
+        },
+        required: ['travelers', 'flightOffers']
+      }
     },
     {
       name: 'get_passengers',

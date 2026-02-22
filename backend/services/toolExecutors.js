@@ -33,4 +33,20 @@ async function get_passengers(args){
     return res.json();
 };
 
-module.exports = {search_flights, retrieve_booking, cancel_booking, get_passengers};
+// Creates a booking in mock service
+async function create_booking(args) {
+    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/booking/flight-orders`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-service-key': process.env.SERVICE_API_KEY
+        },
+        body: JSON.stringify({
+            travelers: args.travelers,
+            flightOffers: args.flightOffers
+        })
+    });
+    return res.json();
+}
+
+module.exports = {search_flights, retrieve_booking, cancel_booking, get_passengers, create_booking};

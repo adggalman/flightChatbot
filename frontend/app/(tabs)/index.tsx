@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { StyleSheet, View, TextInput, FlatList, Text, TouchableOpacity } from 'react-native';
+import { useState} from 'react';
+import { StyleSheet, View, TextInput, FlatList, Text, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 export default function ChatScreen() {
   const [messages, setMessages] = useState<{ id: string; text: string; sender: string }[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -40,7 +41,8 @@ export default function ChatScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <FlatList
         data={messages}
         keyExtractor={item => item.id}
@@ -51,7 +53,7 @@ export default function ChatScreen() {
         )}
         contentContainerStyle={styles.messageList}
       />
-      <View style={styles.inputRow}>
+      <View style={[styles.inputRow]}>
         <TextInput
           style={styles.input}
           value={input}
@@ -63,7 +65,8 @@ export default function ChatScreen() {
           <Text style={styles.sendText}>Send</Text>
         </TouchableOpacity>
       </View>
-    </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
