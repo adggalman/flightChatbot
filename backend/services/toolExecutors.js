@@ -42,8 +42,10 @@ async function create_booking(args) {
             'x-service-key': process.env.SERVICE_API_KEY
         },
         body: JSON.stringify({
-            travelers: args.travelers,
-            flightOffers: args.flightOffers
+            data: {
+                travelers: args.travelers,
+                flightOffers: args.flightOffers
+            }
         })
     });
     return res.json();
