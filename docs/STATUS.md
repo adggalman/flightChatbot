@@ -8,18 +8,22 @@ Handoff document between Claude (implementation guidance) and Gemini (documentat
 
 **Goal:** Polish and showcase readiness.
 
-**Last completed (2026-02-21):**
-- Linear post-processing integration — complete (local + CI verified, ci-#7+)
-- Allure history — trend carries forward across CI runs via gh-pages checkout
-- Historical runs index — `runs.html` with per-run report links, `keep_files: true` on deploy
-- Boilerplate branch — empty scaffold pushed to `origin/boilerplate`
-- README — full documentation with Linear screenshot
-- Branch protection — main requires PR + 1 approval for non-admins
+**Last completed (2026-02-22):**
+- create_booking end-to-end verified — real PNR returned from MongoDB (e.g. 3LIWAO7DUB0K), no hallucination
+- SERVICE_API_KEY mismatch between backend and mock-services Vercel envs — fixed
+- Anti-hallucination rules added to Gemini system prompt (never invent PNRs, always use tools)
+- Android nav bar overlap fixed — useSafeAreaInsets + removed duplicate SafeAreaProvider
+- Backend missing security packages fixed in package.json (helmet, rate-limit, hpp, mongo-sanitize, validator)
+- express-rate-limit trust proxy error fixed (app.set('trust proxy', 1))
+- Vercel main branch auto-deploy fixed — ignoreCommand was blocking production builds, removed
+- optionalAuth middleware on /api/chat — anonymous users get role:'user', no 401
 
 **Up next:**
-1. ARCHITECTURE.md diagram fix (Gemini task — see below)
-2. Additional screenshots (Allure report showing Linear link, runs.html page)
-3. README final review pass
+1. LLM: Present PNR to user after booking (not internal orderId)
+2. Booking: Retrieve/cancel by PNR + email (not orderId)
+3. UX research: Study Singapore Airlines Kris chatbot as benchmark
+4. CI: Trigger Cucumber tests on deployment_status event (avoid flaky results)
+5. ARCHITECTURE.md diagram fix (Gemini task — see below)
 
 ---
 

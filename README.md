@@ -16,7 +16,7 @@ The architecture diagram is available in [docs/ARCHITECTURE.md](docs/ARCHITECTUR
 | Layer | Technology |
 |---|---|
 | Mobile | React Native + Expo |
-| Backend | Node.js + Express.js |
+| Backend | Node.js + Express.js |x
 | Database | MongoDB Atlas (Mongoose) |
 | AI | Google Gemini (function calling) |
 | Flight Data | Amadeus Travel API |
@@ -100,7 +100,7 @@ This project was built layer by layer, following a structured development proces
 - Included secrets for all required services
 
 **Step 11 — Linear Integration**
-- Chose a post-processing approach over a hooks-based one to mirror the AirAsia Xray CI pattern.
+- Chose a post-processing approach over a hooks-based one
 - Built `linearHelper.js` to handle GraphQL mutations with variables, preventing injection vulnerabilities.
 - Created `cucumber-to-linear.js` script to read the `cucumber-report.json`, create tickets in Linear, and patch the Allure result JSON files.
 - Implemented a `workflow_dispatch` boolean flag for on-demand ticket creation, so it doesn't run on every push.
