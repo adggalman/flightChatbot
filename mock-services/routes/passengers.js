@@ -18,7 +18,7 @@ router.get('/:flightnumber/passengers', async (req, res) => {
 
             for (const doc of docs) {
                 for (const offer of doc.orderData.flightOffers){
-                    for (const itinerary of offer.itineraries) {
+                    for (const itinerary of (offer.itineraries || [])) {
                         for (const segment of itinerary.segments) {
                             if (segment.carrierCode + segment.number === flightnumber)
                                 passengers.push(...doc.orderData.travelers);
