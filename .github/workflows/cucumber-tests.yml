@@ -14,9 +14,6 @@ permissions:
 
 jobs:
     test:
-      concurrency:
-        group: cucumber-tests
-        cancel-in-progress: false
       if: |
         github.event_name == 'workflow_dispatch' ||
         (github.event_name == 'deployment_status' &&
