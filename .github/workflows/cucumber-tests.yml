@@ -11,12 +11,12 @@ on:
 
 permissions:
     contents: write
-concurrency:
-    group: cucumber-tests
-    cancel-in-progress: true
 
 jobs:
     test:
+      concurrency:
+        group: cucumber-tests
+        cancel-in-progress: true
       if: |
         github.event_name == 'workflow_dispatch' ||
         (github.event_name == 'deployment_status' &&
