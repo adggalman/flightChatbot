@@ -1,0 +1,13 @@
+appId: com.flightchatbot.app
+---
+- launchApp
+- assertVisible:
+    text: "Type a message..."
+- tapOn:
+    text: "Type a message..."
+- inputText: "I want to book a flight"
+- tapOn:
+    text: "Send"
+- waitForAnimationToEnd
+- assertVisible:
+    text: "Send"

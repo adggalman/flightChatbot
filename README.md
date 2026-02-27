@@ -118,6 +118,10 @@ The integration follows a post-processing pattern:
 
 ![Linear tickets grouped by run label](docs/screenshots/linear-tickets.png)
 
+![Historical runs index](docs/screenshots/runs-index.png)
+
+![Allure test with Linear link](docs/screenshots/allure-linear-link.png)
+
 ### How to Trigger
 
 You can trigger this process manually in GitHub Actions:
@@ -174,6 +178,11 @@ SERVICE_API_KEY=
 BACKEND_URL=http://localhost:3000
 MOCK_SERVICE_URL=http://localhost:3001
 SERVICE_API_KEY=
+LINEAR_API_KEY=
+LINEAR_TEAM_ID=
+LINEAR_STATE_IN_PROGRESS=
+LINEAR_STATE_DONE=
+LINEAR_STATE_CANCELED=
 ```
 
 **Run locally:**

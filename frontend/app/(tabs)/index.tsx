@@ -72,7 +72,7 @@ export default function ChatScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
-  messageList: { padding: 16, paddingBottom: 8 },
+  messageList: { padding: 16, paddingBottom: 8, backgroundColor: '#fff' },
   bubble: { padding: 12, borderRadius: 16, marginBottom: 8, maxWidth: '80%' },
   userBubble: { backgroundColor: '#007AFF', alignSelf: 'flex-end' },
   botBubble: { backgroundColor: '#E5E5EA', alignSelf: 'flex-start' },
