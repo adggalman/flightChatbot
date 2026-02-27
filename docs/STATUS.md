@@ -8,6 +8,12 @@ Handoff document between Claude (implementation guidance) and Gemini (documentat
 
 **Goal:** Polish and showcase readiness.
 
+**Last completed (2026-02-28):**
+- Mock-services GitHub auto-deploy connected (Root Directory = mock-services)
+- Passengers route fixed — guard against missing itineraries on real bookings
+- CI trigger fixed — filter to backend deployment only, concurrency group added
+- All 10 Cucumber tests passing (verified via manual dispatch)
+
 **Last completed (2026-02-22):**
 - create_booking end-to-end verified — real PNR returned from MongoDB (e.g. 3LIWAO7DUB0K), no hallucination
 - SERVICE_API_KEY mismatch between backend and mock-services Vercel envs — fixed
@@ -61,6 +67,10 @@ Handoff document between Claude (implementation guidance) and Gemini (documentat
 | **Deployment** | | |
 | Backend on Vercel | ✅ Done | https://flightchatbot.vercel.app |
 | Mock Services on Vercel | ✅ Done | https://mock-services-beta.vercel.app |
+| Mock Services GitHub auto-deploy | ✅ Done | Vercel Settings → Git, Root Directory = mock-services — missed when backend auto-deploy was set up |
+| Mock Services MONGODB_URI on Vercel | ✅ Done | Already set — Claude incorrectly assumed it was missing and asked user to verify twice |
+| CI double-cancel diagnosis | ⚠️ Mistake | Made 3 code changes guessing at root cause (target_url filter, revert, move concurrency) without verifying what was actually triggering the cancellations — user had to stop Claude and ask to verify first |
+| ignoreCommand rollout | ⚠️ Mistake | Changed both backend and mock-services vercel.json in one push — three times, including the commit that introduced the one-service-per-push rule itself |
 | **Automation** | | |
 | Cucumber scaffold | ✅ Done | Features, step defs, helpers, hooks |
 | Feature files | ✅ Done | health, chat, booking, passengers, happy-path flow |
