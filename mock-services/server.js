@@ -13,6 +13,10 @@ const app = express();
 
 // Set up middleware
 app.use(express.json());
+app.use(async (req, res, next) => {
+    await connectDB();
+    next();
+});
 
 // Set up routes
 app.get('/health', (req, res) => res.json({status: 'ok'}));
@@ -21,15 +25,10 @@ app.use(serviceAuth)
 app.use('/mock-api/booking', require('./routes/booking'));
 app.use('/mock-api/flights', require('./routes/passengers'));
 
-// Start the server
+// Start the server (local only — Vercel handles this in production)
 const PORT = process.env.PORT || 3001;
-connectDB().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-
-    });
-    
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
 
-module.exports = app
-
+module.exports = app;
