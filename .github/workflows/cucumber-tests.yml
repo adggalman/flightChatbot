@@ -11,6 +11,9 @@ on:
 
 permissions:
     contents: write
+concurrency:
+    group: cucumber-tests
+    cancel-in-progress: true
 
 jobs:
     test:
