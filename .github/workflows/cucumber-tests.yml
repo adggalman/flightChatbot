@@ -1,10 +1,7 @@
 name: Cucumber Tests
 
 on:
-    push:
-      branches: [main]
-    pull_request:
-      branches: [main]
+    deployment_status:
     workflow_dispatch:
       inputs:
         create_linear_tickets:
@@ -17,6 +14,11 @@ permissions:
 
 jobs:
     test:
+      if: |
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'deployment_status' &&
+         github.event.deployment_status.state == 'success' &&
+         github.event.deployment.environment == 'Production')
       runs-on: ubuntu-latest
 
       steps:
