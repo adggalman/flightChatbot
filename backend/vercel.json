@@ -1,7 +1,6 @@
 {
     "version": 2,
-    "ignoreCommand": "git log --name-only --format='' -1 | grep -q '^backend/'",
-    "builds": [
+"builds": [
       {
         "src": "server.js",
         "use": "@vercel/node"
