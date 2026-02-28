@@ -52,6 +52,14 @@ jobs:
             EXIT_CODE=$?
             set -e
             echo "Cucumber exit code: $EXIT_CODE"
+            cat reports/cucumber-report.json | python3 -c "
+import json,sys
+data=json.load(sys.stdin)
+for feature in data:
+    for scenario in feature.get('elements',[]):
+        statuses=[s['result']['status'] for s in scenario.get('steps',[])]
+        print(scenario['name'], '->', set(statuses))
+" || echo "No report file found"
             exit $EXIT_CODE
         
         - name: Create Linear tickets
