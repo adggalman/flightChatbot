@@ -398,6 +398,8 @@ Log every error, blocker, misconfiguration, AI misstep, and user error here as i
 | 14 | Misconfig | CI `reports/` directory missing on fresh checkout — JSON formatter exits 1 after all tests pass. Masked by pre-existing test failures; only surfaced after tests were fixed | Added `mkdir -p reports/allure/allure-results` before `npm test` in CI workflow |
 | 15 | AI misstep | Diagnosed CI exit code 1 by guessing (reports/ directory) without first capturing the actual error — fix didn't work. Should have added stderr logging first to identify root cause before making changes | Rule: add diagnostic logging before attempting fixes for unknown errors |
 | 16 | AI misstep | Added `2>&1` + `echo` for diagnostics but bash `-e` flag killed the script before echo ran — incomplete understanding of GitHub Actions shell behavior | Used `set +e` / `set -e` pattern to properly capture exit code without bash exiting early |
+| 17 | AI misstep | Embedded Python `-c` inline in YAML `run:` block — code at column 0 broke YAML indentation, workflow showed as file path instead of name (parse error) | Replaced with heredoc to `/tmp/parse_report.py` to keep Python properly indented |
+| 18 | AI misstep | `flight-booking.feature` was edited (orderId → PNR step rename) but not staged before commit `f261818` — CI ran old step text, causing `undefined` status and exit code 1 | Rule added: run `git status` after staging to verify all related files are included before committing |
 
 ---
 

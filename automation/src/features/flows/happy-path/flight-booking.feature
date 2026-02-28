@@ -6,7 +6,7 @@ Feature: Flight Booking Happy Path
     Then the flight search should return results
     
     When I create a flight order with the first result
-    Then the order should be created with an orderId
+    Then the order should be created with a PNR
     
     When I retrieve the created order
     Then the order details should be returned
