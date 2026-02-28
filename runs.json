@@ -1,5 +1,13 @@
 [
   {
+    "run": "72",
+    "runId": "22513199779",
+    "date": "2026-02-28T04:19:52.424Z",
+    "trigger": "deployment_status",
+    "status": "fail",
+    "linear": "-"
+  },
+  {
     "run": "71",
     "runId": "22513131000",
     "date": "2026-02-28T04:15:39.724Z",
