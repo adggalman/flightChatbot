@@ -47,7 +47,8 @@ jobs:
               CREATE_LINEAR_TICKETS: ${{ inputs.create_linear_tickets || 'false' }}
           run: |
             mkdir -p reports/allure/allure-results
-            npm test
+            npm test 2>&1
+            echo "Cucumber exit code: $?"
         
         - name: Create Linear tickets
           if: always() && inputs.create_linear_tickets
