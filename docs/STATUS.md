@@ -21,10 +21,11 @@ Handoff document between Claude (implementation guidance) and Gemini (documentat
 - All 10 Cucumber tests passing — verified via auto-trigger and manual dispatch
 
 **Up next:**
-1. Gemini Task 5 — UX Research (Kris + KLM) using Tavily — unblocked, see below
-2. Debug CI exit code 1 (no FAILED lines — likely undefined step or Allure step failure)
-3. LLM: Fix travelers id field description (sequential "1", "2" — not passport ID)
-4. LLM: Resolve relative dates ("tomorrow", "next Monday") using today's date from system prompt
+1. Logging: Implement fixes from LOGGING_AUDIT.md — axios interceptor (apiHelpers.js), hooks.js error message, mockSteps.js cleanup warn
+2. Mobile UI: Bridge Cucumber to Maestro (Android) — reusable Gherkin steps backed by Maestro YAML flows with env var substitution. Prototype here, carry over to work project (Xray). Handoff doc at completion.
+3. CSR Layer: Salesforce free developer tier — simulate case creation to resolution, bot escalates via API
+4. LLM: Fix travelers id field description (sequential "1", "2" — not passport ID)
+5. LLM: Resolve relative dates ("tomorrow", "next Monday") using today's date from system prompt
 
 ---
 
@@ -134,17 +135,20 @@ CI/CD (GitHub Actions)
 
 ### Task Status — Claude-managed (Gemini: read only, do not edit this table)
 
+Status legend: 🔲 Pending | 🔄 In Progress | 👀 In Review (done, awaiting user sign-off — do not rework) | ✅ Done
+
 | Task | Status |
 |------|--------|
 | Task 1 — Fix ARCHITECTURE.md diagram | ✅ Done |
 | Task 2 — Add runs.html screenshot to README | ✅ Done |
 | Task 3 — Add Allure screenshot to README | ✅ Done |
 | Task 4 — Final README review | ✅ Done |
-| Task 5 — UX Research: Airline Chatbot Benchmark Study | 🔄 In Progress |
+| Task 5 — UX Research: Airline Chatbot Benchmark Study | 👀 In Review |
 | Task 6 — Update Built Components table | ✅ Done |
 | Task 7 — Research: Skills, Agents, MCP | ✅ Done |
 | Task 8 — Learning Journey: Agents, Skills, MCP | ✅ Done |
 | Task 9 — API Inventory | ✅ Done |
+| Task 10 — CI/Test Logging Audit | 👀 In Review |
 
 ---
 
@@ -318,6 +322,41 @@ For each endpoint document:
 
 ---
 
+### Task 10 — CI/Test Logging Audit
+
+Study the project end-to-end — tests, pipeline, and report output — and identify where useful logging is missing or insufficient. Goal: when a CI run fails, the developer should be able to diagnose the root cause directly from the GitHub Actions log without downloading files or re-running locally.
+
+**What to read:**
+- `.github/workflows/cucumber-tests.yml` — full pipeline
+- `automation/src/features/` — all feature files and step definitions
+- `automation/src/helpers/apiHelpers.js` — HTTP client setup
+- `automation/src/support/hooks.js` — before/after hooks
+- `automation/cucumber.js` — formatter config
+
+**What to look for:**
+- Steps that fail silently (catch blocks that swallow errors without logging)
+- API calls with no request/response logging on failure
+- Hooks that could log scenario name, tags, or status but don't
+- CI steps that produce no output on success but also no useful output on failure
+- Any place where a developer would currently have to guess at root cause
+
+**Deliverable:** `docs/LOGGING_AUDIT.md`
+
+For each gap found, document:
+- Location (file + line or CI step name)
+- What's missing
+- Suggested log line or approach (plain English — do not write code)
+
+**Definition of Done:**
+- [ ] All feature files and step definitions reviewed
+- [ ] CI pipeline reviewed step by step
+- [ ] hooks.js reviewed
+- [ ] apiHelpers.js reviewed
+- [ ] Every gap documented with location + what's missing + suggestion
+- [ ] File saved to `docs/LOGGING_AUDIT.md`
+
+---
+
 ### Task 7 — Research: Skills, Agents, and MCP for our Dev Workflow
 
 Research Claude Code and Gemini CLI capabilities for **Skills**, **Agents**, and **MCP (Model Context Protocol)** servers. Goal: identify which ones are worth adopting in this project's dev workflow.
@@ -400,6 +439,7 @@ Log every error, blocker, misconfiguration, AI misstep, and user error here as i
 | 16 | AI misstep | Added `2>&1` + `echo` for diagnostics but bash `-e` flag killed the script before echo ran — incomplete understanding of GitHub Actions shell behavior | Used `set +e` / `set -e` pattern to properly capture exit code without bash exiting early |
 | 17 | AI misstep | Embedded Python `-c` inline in YAML `run:` block — code at column 0 broke YAML indentation, workflow showed as file path instead of name (parse error) | Replaced with heredoc to `/tmp/parse_report.py` to keep Python properly indented |
 | 18 | AI misstep | `flight-booking.feature` was edited (orderId → PNR step rename) but not staged before commit `f261818` — CI ran old step text, causing `undefined` status and exit code 1 | Rule added: run `git status` after staging to verify all related files are included before committing |
+| 19 | AI misstep | Reviewed LOGGING_AUDIT.md from memory instead of re-reading the file — Gemini had updated it but Claude gave feedback on the stale version | Rule added: always re-read docs files before giving feedback, never rely on in-session memory |
 
 ---
 
