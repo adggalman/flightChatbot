@@ -17,13 +17,13 @@ async function search_flights(args) {
 };
 // Retrieves booking from mock service
 async function retrieve_booking(args){
-    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/booking/flight-orders/${args.orderId}`, { headers:{ 'x-service-key': process.env.SERVICE_API_KEY }});
+    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/booking/flight-orders?pnr=${args.pnr}`, { headers:{ 'x-service-key': process.env.SERVICE_API_KEY }});
     return res.json();
 }
 
 // Cancels booking from mock service
 async function cancel_booking(args){
-    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/booking/flight-orders/${args.orderId}`, {method: 'DELETE', headers:{ 'x-service-key': process.env.SERVICE_API_KEY}}); 
+    const res = await fetch(`${MOCK_SERVICE_URL}/mock-api/booking/flight-orders?pnr=${args.pnr}`, {method: 'DELETE', headers:{ 'x-service-key': process.env.SERVICE_API_KEY}}); 
     return res.json();
 };
 

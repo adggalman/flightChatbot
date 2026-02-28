@@ -6,20 +6,23 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const SYSTEM_PROMPT = `You are a flight booking assistant. You can help users with:
   - Searching for flights (by origin, destination, date, number of passengers)
   - Booking flights
-  - Retrieving a booking (by order ID / PNR only)
-  - Cancelling a booking (by order ID / PNR)
+  - Retrieving a booking (PNR)
+  - Cancelling a booking (PNR)
   - Looking up passenger lists for a flight (by flight number)
   - Today's date is ${new Date().toISOString().split('T')[0]}.
 
   You CANNOT look up bookings by e-ticket number, frequent flyer number, or passenger name.
-  If a user wants to retrieve or manage a booking, ask for their order ID or PNR (6-character code).
+  If a user wants to retrieve or cancel a booking, ask for their PNR (booking reference) and email address.
+  Always collect both before calling retrieve_booking or cancel_booking.
   Be concise and helpful.
+  You are only able to assist with flight-related requests. If a user asks about anything outside of flights, bookings, or passenger information, politely let them know you can only help with flight-related topics.
   
    IMPORTANT: You must ALWAYS use the provided tools for any booking action.
     - To create a booking: you MUST call create_booking — never invent a PNR or order ID.
     - To retrieve a booking: you MUST call retrieve_booking.
     - To cancel a booking: you MUST call cancel_booking.
     - If a tool returns an error, tell the user the action failed — do not fabricate a result.
+    - After create_booking succeeds, always present the PNR (booking reference) to the user — extract it from associatedRecords[0].reference in the tool response. Never show the internal orderId to the user.
     - Never invent, guess, or assume any booking reference, PNR, flight detail, or order ID.`
 
 const model = genAI.getGenerativeModel({
@@ -42,25 +45,26 @@ const model = genAI.getGenerativeModel({
     },
     {
       name: 'retrieve_booking',
-      description: 'Get the details of the flight using provided orderId',
+      description: 'Get the details of a booking using the PNR (booking reference)',
       parameters: {
         type: 'OBJECT',
         properties: {
-          orderId: { type: 'STRING', description: 'orderId of the booking to be retrieved' }
+          pnr: {
+            type: 'STRING', description: 'PNR (booking reference) — 6-character code from associatedRecords[0].reference'
+          }
         },
-        required: ['orderId']
+        required: ['pnr']
       }
-
     },
     {
       name: 'cancel_booking',
-      description: 'Cancel booking by orderId',
+      description: 'Cancel a booking using the PNR (booking reference)',
       parameters: {
         type: 'OBJECT',
         properties: {
-          orderId: { type: 'STRING', description: 'orderId of the booking to be retrieved' }
+          pnr: { type: 'STRING', description: 'PNR (booking reference) — 6-character code from associatedRecords[0].reference' }
         },
-        required: ['orderId']
+        required: ['pnr']
       },
     },
     {
@@ -76,7 +80,7 @@ const model = genAI.getGenerativeModel({
           },
           flightOffers: {
             type: 'ARRAY',
-            description: 'Flight offer(s) selected from search results',
+            description: 'The complete flight offer object(s) exactly as returned by search_flights — do not reconstruct or summarise, pass the full object unchanged',
             items: { type: 'OBJECT' }
           }
         },
@@ -123,7 +127,7 @@ async function chat(conversationHistory, role) {
         const toolResult = await toolExecutors[functionName](args);
         result = await chatSession.sendMessage([{
           functionResponse: { name: functionName, response: { toolResult } }
-        
+
         }]);
       }
 
