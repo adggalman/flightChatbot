@@ -47,14 +47,13 @@ jobs:
               CREATE_LINEAR_TICKETS: ${{ inputs.create_linear_tickets || 'false' }}
           run: |
             mkdir -p reports/allure/allure-results
-            set +e
-            npm test 2>&1
-            EXIT_CODE=$?
-            set -e
-            echo "Cucumber exit code: $EXIT_CODE"
-            node -e "const d=JSON.parse(require('fs').readFileSync('reports/cucumber-report.json','utf8'));d.forEach(f=>(f.elements||[]).forEach(s=>console.log(s.name,'->',new Set(s.steps.map(st=>st.result.status)))))" || echo "No report file found"
-            exit $EXIT_CODE
-        
+            npm test
+
+        - name: Debug — print test report
+          if: always()
+          working-directory: automation
+          run: cat reports/cucumber-report.json
+
         - name: Create Linear tickets
           if: always() && inputs.create_linear_tickets
           working-directory: automation
