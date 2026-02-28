@@ -11,8 +11,8 @@ Handoff document between Claude (implementation guidance) and Gemini (documentat
 **Last completed (2026-02-28):**
 - Mock-services GitHub auto-deploy connected (Root Directory = mock-services)
 - Passengers route fixed — guard against missing itineraries on real bookings
-- CI trigger fixed — filter to backend deployment only, concurrency group added
-- All 10 Cucumber tests passing (verified via manual dispatch)
+- CI trigger fixed — deployment_status state==success (no environment filter needed), 2 runs per push both pass
+- All 10 Cucumber tests passing — verified via auto-trigger and manual dispatch
 
 **Last completed (2026-02-22):**
 - create_booking end-to-end verified — real PNR returned from MongoDB (e.g. 3LIWAO7DUB0K), no hallucination
@@ -71,6 +71,8 @@ Handoff document between Claude (implementation guidance) and Gemini (documentat
 | Mock Services MONGODB_URI on Vercel | ✅ Done | Already set — Claude incorrectly assumed it was missing and asked user to verify twice |
 | CI double-cancel diagnosis | ⚠️ Mistake | Made 3 code changes guessing at root cause (target_url filter, revert, move concurrency) without verifying what was actually triggering the cancellations — user had to stop Claude and ask to verify first |
 | ignoreCommand rollout | ⚠️ Mistake | Changed both backend and mock-services vercel.json in one push — three times, including the commit that introduced the one-service-per-push rule itself |
+| Manual dispatch claim | ⚠️ Mistake | Stated "manual dispatch works" in summary without verifying — had not been tested since concurrency was removed |
+| Brave Search API free tier | ⚠️ Mistake | Kanban referenced "free tier 2k queries/month" from training data — Brave dropped the free tier in 2025. Always verify training data against real current data before presenting anything as fact |
 | **Automation** | | |
 | Cucumber scaffold | ✅ Done | Features, step defs, helpers, hooks |
 | Feature files | ✅ Done | health, chat, booking, passengers, happy-path flow |
@@ -169,6 +171,21 @@ Add a screenshot showing the Allure test detail view with the Linear issue link 
 
 ### Task 5 — UX Research: Airline Chatbot Benchmark Study ❌ INCOMPLETE — redo this
 
+**Web search is now available.** Use `run_shell_command` with this exact curl pattern:
+
+```bash
+source .env && curl -s -X POST https://api.tavily.com/search \
+  -H "Content-Type: application/json" \
+  -d "{\"api_key\":\"$TAVILY_API_KEY\",\"query\":\"YOUR SEARCH QUERY HERE\"}"
+```
+
+Run multiple searches per airline. Example queries:
+- `"Singapore Airlines Kris chatbot demo 2024 booking flow"`
+- `"KLM BlueBot BB chatbot UX review conversation"`
+- `"Singapore Airlines Kris chatbot error handling escalation"`
+
+
+
 The file `docs/CHATBOT_BEHAVIOR.md` was created with an empty template. **This is not done.** Every section is blank. You must perform actual research and fill it in.
 
 **IMPORTANT: Do NOT mark this task as done until every section in CHATBOT_BEHAVIOR.md has real content.**
@@ -260,6 +277,33 @@ Show exactly:
 - [ ] All file paths are explicit (no "the config file" — say `.claude/settings.json`)
 
 
+
+---
+
+### Task 9 — API Inventory
+
+Document every API call made in the system. Read these files to extract the endpoints:
+- `backend/services/toolExecutors.js` — all LLM tool calls (search, booking, passengers)
+- `backend/routes/` — all backend routes exposed to the frontend
+- `mock-services/routes/booking.js` — booking CRUD endpoints
+- `mock-services/routes/passengers.js` — passenger lookup endpoint
+- `mock-services/server.js` — health check
+
+For each endpoint document:
+- Method + path
+- Auth required (none / JWT / x-service-key)
+- Request params/body shape
+- Response shape (success + error)
+
+**Deliverable:** `docs/API_INVENTORY.md`
+
+**Definition of Done:**
+- [ ] All backend routes documented (health, auth, chat, flights)
+- [ ] All mock-services routes documented (health, booking CRUD, passengers)
+- [ ] All toolExecutors.js outbound calls documented (what the LLM calls internally)
+- [ ] Each entry has: method, path, auth, request shape, response shape
+- [ ] No placeholder entries — every field filled with real values from the code
+- [ ] File saved to `docs/API_INVENTORY.md`
 
 ---
 
