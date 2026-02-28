@@ -8,28 +8,23 @@ Handoff document between Claude (implementation guidance) and Gemini (documentat
 
 **Goal:** Polish and showcase readiness.
 
-**Last completed (2026-02-28):**
+**Last completed (2026-02-28 session 2):**
+- Tavily web search set up for Gemini CLI — API key in .env, curl pattern in docs/MCP_SETUP.md, 1,000 req/month limit
+- Booking retrieve/cancel: switched from orderId to PNR at all layers (mock-services API, toolExecutors, llmService function declarations)
+- System prompt: bot now asks for PNR + email before retrieve/cancel, declines off-topic requests, presents PNR after booking
+- Automation tests updated to PNR-based flow (apiHelpers, mockSteps, flowSteps, booking.feature)
+
+**Last completed (2026-02-28 session 1):**
 - Mock-services GitHub auto-deploy connected (Root Directory = mock-services)
 - Passengers route fixed — guard against missing itineraries on real bookings
 - CI trigger fixed — deployment_status state==success (no environment filter needed), 2 runs per push both pass
 - All 10 Cucumber tests passing — verified via auto-trigger and manual dispatch
 
-**Last completed (2026-02-22):**
-- create_booking end-to-end verified — real PNR returned from MongoDB (e.g. 3LIWAO7DUB0K), no hallucination
-- SERVICE_API_KEY mismatch between backend and mock-services Vercel envs — fixed
-- Anti-hallucination rules added to Gemini system prompt (never invent PNRs, always use tools)
-- Android nav bar overlap fixed — useSafeAreaInsets + removed duplicate SafeAreaProvider
-- Backend missing security packages fixed in package.json (helmet, rate-limit, hpp, mongo-sanitize, validator)
-- express-rate-limit trust proxy error fixed (app.set('trust proxy', 1))
-- Vercel main branch auto-deploy fixed — ignoreCommand was blocking production builds, removed
-- optionalAuth middleware on /api/chat — anonymous users get role:'user', no 401
-
 **Up next:**
-1. LLM: Present PNR to user after booking (not internal orderId)
-2. Booking: Retrieve/cancel by PNR + email (not orderId)
-3. UX research: Study Singapore Airlines Kris chatbot as benchmark
-4. CI: Trigger Cucumber tests on deployment_status event (avoid flaky results)
-5. ARCHITECTURE.md diagram fix (Gemini task — see below)
+1. Gemini Task 5 — UX Research (Kris + KLM) using Tavily — unblocked, see below
+2. Debug CI exit code 1 (no FAILED lines — likely undefined step or Allure step failure)
+3. LLM: Fix travelers id field description (sequential "1", "2" — not passport ID)
+4. LLM: Resolve relative dates ("tomorrow", "next Monday") using today's date from system prompt
 
 ---
 
@@ -137,7 +132,23 @@ CI/CD (GitHub Actions)
 
 ## Gemini TODO
 
-### Task 1 — Fix ARCHITECTURE.md diagram ✅ Done
+### Task Status — Claude-managed (Gemini: read only, do not edit this table)
+
+| Task | Status |
+|------|--------|
+| Task 1 — Fix ARCHITECTURE.md diagram | ✅ Done |
+| Task 2 — Add runs.html screenshot to README | ✅ Done |
+| Task 3 — Add Allure screenshot to README | ✅ Done |
+| Task 4 — Final README review | ✅ Done |
+| Task 5 — UX Research: Airline Chatbot Benchmark Study | 🔄 In Progress |
+| Task 6 — Update Built Components table | ✅ Done |
+| Task 7 — Research: Skills, Agents, MCP | ✅ Done |
+| Task 8 — Learning Journey: Agents, Skills, MCP | ✅ Done |
+| Task 9 — API Inventory | ✅ Done |
+
+---
+
+### Task 1 — Fix ARCHITECTURE.md diagram
 
 The ASCII diagram in `docs/ARCHITECTURE.md` has bugs:
 1. The `(Proxy)` box label is fine conceptually (backend proxies Amadeus) but the box is a duplicate of the Backend box above — merge them or clarify the flow
@@ -154,7 +165,7 @@ Cucumber.js Tests → Backend + Mock Services (API contract tests)
 GitHub Actions → Allure → GitHub Pages
 ```
 
-### Task 2 — Add runs.html screenshot to README ✅ Done
+### Task 2 — Add runs.html screenshot to README
 
 Add a second screenshot to the Linear Integration section in README.md showing the `runs.html` historical runs index page. Use placeholder:
 ```
@@ -162,16 +173,16 @@ Add a second screenshot to the Linear Integration section in README.md showing t
 ```
 (User will add the actual screenshot)
 
-### Task 3 — Add Allure screenshot to README ✅ Done
+### Task 3 — Add Allure screenshot to README
 
 Add a screenshot showing the Allure test detail view with the Linear issue link visible in the "Links" section. Use placeholder:
 ```
 ![Allure test with Linear link](docs/screenshots/allure-linear-link.png)
 ```
 
-### Task 5 — UX Research: Airline Chatbot Benchmark Study ❌ INCOMPLETE — redo this
+### Task 5 — UX Research: Airline Chatbot Benchmark Study
 
-**Web search is now available.** Use `run_shell_command` with this exact curl pattern:
+**Web search is now available.** Tavily free tier — **1,000 requests/month limit. Use sparingly.** Use `run_shell_command` with this exact curl pattern:
 
 ```bash
 source .env && curl -s -X POST https://api.tavily.com/search \
@@ -220,7 +231,7 @@ Deliverable: `docs/CHATBOT_BEHAVIOR.md` fully populated with real research findi
 
 ---
 
-### Task 8 — Learning Journey: Agents, Skills, and MCP ✅ Done
+### Task 8 — Learning Journey: Agents, Skills, and MCP
 
 **Before writing anything, read `docs/test-automation-process.md` in full.** That is the quality bar. Notice: every step has a number, a heading, real commands in code blocks, exact file paths, and zero vague descriptions. The user wrote that doc and expects the same level of specificity here.
 
@@ -307,7 +318,7 @@ For each endpoint document:
 
 ---
 
-### Task 7 — Research: Skills, Agents, and MCP for our Dev Workflow ✅ Done
+### Task 7 — Research: Skills, Agents, and MCP for our Dev Workflow
 
 Research Claude Code and Gemini CLI capabilities for **Skills**, **Agents**, and **MCP (Model Context Protocol)** servers. Goal: identify which ones are worth adopting in this project's dev workflow.
 
@@ -335,7 +346,7 @@ Research Claude Code and Gemini CLI capabilities for **Skills**, **Agents**, and
 
 ---
 
-### Task 6 — Update Built Components table in STATUS.md ✅ Done
+### Task 6 — Update Built Components table in STATUS.md
 
 Update the **Built Components** table to reflect recent additions. Add the following rows:
 
@@ -354,7 +365,7 @@ Place these rows under the appropriate sections (Backend and CI/CD).
 
 ---
 
-### Task 4 — Final README review ✅ Done
+### Task 4 — Final README review
 
 Read the full README.md and check:
 - All links are correct and working
@@ -362,6 +373,31 @@ Read the full README.md and check:
 - Step 11 (Linear) is marked as complete (not "In Progress")
 - The `runs.html` link is listed in the Live Links section
 - GitHub Actions secrets list is complete and accurate
+
+---
+
+## Issue Log & Retro
+
+Log every error, blocker, misconfiguration, AI misstep, and user error here as it happens. Review at end of each session. Action items go to KANBAN.md.
+
+| # | Type | Description | Action Item |
+|---|------|-------------|-------------|
+| 1 | AI misstep | Mock-services GitHub auto-deploy not connected — missed when backend was set up | Connected, done |
+| 2 | AI misstep | Assumed MONGODB_URI missing on Vercel, asked user twice — it was already set | Rule added: never re-ask for confirmed info |
+| 3 | AI misstep | Used local .env SERVICE_API_KEY for curl instead of Vercel key | Rule added: prod endpoints use automation/.env |
+| 4 | AI misstep | Made 3 CI config changes without verifying root cause first | Rule added: verify root cause before any change |
+| 5 | AI misstep | Changed both vercel.json files in one push — three times, including the one-service-per-push commit | Rule added: one service per push |
+| 6 | AI misstep | Stated "manual dispatch works" without verifying | Rule added: never claim something works without verifying |
+| 7 | AI misstep | Brave Search API free tier referenced from training data — no longer exists | Rule added: verify training data vs real |
+| 8 | AI misstep | Echoed API key back in chat response | Rule added: never echo key values |
+| 9 | Code bug | Passengers route crashed on real Amadeus bookings — itineraries missing in create_booking response | Fixed with `\|\| []` guard |
+| 10 | Misconfig | Vercel mock-services Root Directory not set — served nothing | Fixed, Root Directory = mock-services |
+| 11 | LLM behavior | Gemini constructs simplified flightOffers `{segments, price}` instead of passing full Amadeus offer | Kanban: fix function declaration |
+| 12 | LLM behavior | Bot presents orderId to user after booking instead of PNR | Kanban: fix system prompt |
+| 13 | Code naming | Step definition named "the order should be created with an orderId" after switching to PNR — stale name surfaced in Allure reports | Renamed to "with a PNR" in flowSteps.js + flight-booking.feature |
+| 14 | Misconfig | CI `reports/` directory missing on fresh checkout — JSON formatter exits 1 after all tests pass. Masked by pre-existing test failures; only surfaced after tests were fixed | Added `mkdir -p reports/allure/allure-results` before `npm test` in CI workflow |
+| 15 | AI misstep | Diagnosed CI exit code 1 by guessing (reports/ directory) without first capturing the actual error — fix didn't work. Should have added stderr logging first to identify root cause before making changes | Rule: add diagnostic logging before attempting fixes for unknown errors |
+| 16 | AI misstep | Added `2>&1` + `echo` for diagnostics but bash `-e` flag killed the script before echo ran — incomplete understanding of GitHub Actions shell behavior | Used `set +e` / `set -e` pattern to properly capture exit code without bash exiting early |
 
 ---
 
@@ -379,3 +415,9 @@ Read the full README.md and check:
 - Scope: STATUS.md, KANBAN.md, ARCHITECTURE.md, CHATBOT_BEHAVIOR.md, and any other docs/ files
 - Do NOT write code files, test files, configs, or anything outside docs/
 - When a task says "Deliverable: docs/X.md" — create or edit that file yourself
+
+### Edit Rules (follow strictly)
+- **Do NOT mark tasks as done by editing headings** — Claude handles all task status updates in this file
+- **Your only writes are deliverable content** — write to docs/X.md files, never modify task headings in STATUS.md
+- **If an edit fails (old_string mismatch), stop and report the failure** — do not retry, do not loop, tell the user what failed
+- **Never re-execute a completed step** — if a step produced output, move to the next step
