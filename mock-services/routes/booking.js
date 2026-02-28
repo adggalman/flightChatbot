@@ -51,38 +51,37 @@ router.post('/flight-orders', async(req, res) => {
     }
 });
 
-// For GET /flight-orders/:id
-router.get('/flight-orders/:id', async (req, res) => {
-    try{
-        const id = req.params.id;
+// For GET /flight-orders?pnr=XXX
+router.get('/flight-orders', async (req, res) => {
+    try {
+        const { pnr } = req.query;
+        if (!pnr) return res.status(400).json({ error: 'pnr is required' });
 
-        // Find the booking in MongoDB
-        const doc = await MockFlightOrder.findOne({ orderId: id })
+        const doc = await MockFlightOrder.findOne({
+            'orderData.associatedRecords': { $elemMatch: { reference: pnr } }
+        });
 
-        // Validation
         if (!doc) return res.status(404).json({ error: 'Order not found' });
         res.json({ data: doc.orderData });
-    }
-    catch{
-        res.status(500).json({ error: 'Server error' })
+    } catch {
+        res.status(500).json({ error: 'Server error' });
     }
 });
 
-// For DELETE /flight-orders/:id
-router.delete('/flight-orders/:id', async (req, res) => {
-    try{
-        const id = req.params.id
-        
-        // Delete row
-        const doc = await MockFlightOrder.findOneAndDelete({ orderId: id })
+ // For DELETE /flight-orders?pnr=XXX
+ router.delete('/flight-orders', async (req, res) => {
+    try {
+        const { pnr } = req.query;
+        if (!pnr) return res.status(400).json({ error: 'pnr is required' });
 
-        // Return error if empty
+        const doc = await MockFlightOrder.findOneAndDelete({
+            'orderData.associatedRecords': { $elemMatch: { reference: pnr } }
+        });
+
         if (!doc) return res.status(404).json({ error: 'Order not found' });
-        
         res.json({ message: 'Order cancelled' });
-    }
-    catch{
-        res.status(500).json({ error: 'Server error' })
+    } catch {
+        res.status(500).json({ error: 'Server error' });
     }
 });
 
