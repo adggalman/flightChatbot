@@ -1,5 +1,13 @@
 [
   {
+    "run": "71",
+    "runId": "22513131000",
+    "date": "2026-02-28T04:15:39.724Z",
+    "trigger": "workflow_dispatch",
+    "status": "fail",
+    "linear": "-"
+  },
+  {
     "run": "70",
     "runId": "22513115502",
     "date": "2026-02-28T04:14:30.288Z",
