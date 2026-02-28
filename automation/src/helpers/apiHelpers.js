@@ -18,8 +18,8 @@ const sendChat = (message, history = []) => backendClient.post(apiSpec.chat, { m
 
 // Mock services
 const createOrder = (data) => mockClient.post(apiSpec.flightOrders, { data });
-const getOrder = (orderId) => mockClient.get(`${apiSpec.flightOrders}/${orderId}`);
-const deleteOrder = (orderId) => mockClient.delete(`${apiSpec.flightOrders}/${orderId}`);
+const getOrder = (pnr) => mockClient.get(`${apiSpec.flightOrders}?pnr=${pnr}`);
+const deleteOrder = (pnr) => mockClient.delete(`${apiSpec.flightOrders}?pnr=${pnr}`)
 const getPassengers = (flightNumber) => mockClient.get(`${apiSpec.passengers}/${flightNumber}/passengers`);
 
 module.exports = { getHealth, searchFlights, sendChat, createOrder, getOrder, deleteOrder, getPassengers };

@@ -29,19 +29,19 @@ When('I create a flight order with the first result', { timeout: 15000 }, async 
       flightOffers: [this.flightOffers[0]],
     };
     this.response = await apiHelpers.createOrder(testData);
-    this.createdOrderId = this.response.data.data.id;
+    this.createdPnr = this.response.data.data.associatedRecords[0].reference;
   } catch (e) {
     this.response = e.response;
   }
 });
 
-Then('the order should be created with an orderId', function () {
-  assert.ok(this.createdOrderId);
+Then('the order should be created with a PNR', function () {
+  assert.ok(this.createdPnr);
 });
 
 When('I retrieve the created order', async function () {
   try {
-    this.response = await apiHelpers.getOrder(this.createdOrderId);
+    this.response = await apiHelpers.getOrder(this.createdPnr);
   } catch (e) {
     this.response = e.response;
   }
@@ -53,7 +53,7 @@ Then('the order details should be returned', function () {
 
 When('I cancel the created order', async function () {
   try {
-    this.response = await apiHelpers.deleteOrder(this.createdOrderId);
+    this.response = await apiHelpers.deleteOrder(this.createdPnr);
   } catch (e) {
     this.response = e.response;
   }
@@ -65,7 +65,7 @@ Then('the order should be cancelled successfully', function () {
 
 When('I retrieve the cancelled order', async function () {
   try {
-    this.response = await apiHelpers.getOrder(this.createdOrderId);
+    this.response = await apiHelpers.getOrder(this.createdPnr);
   } catch (e) {
     this.response = e.response;
   }

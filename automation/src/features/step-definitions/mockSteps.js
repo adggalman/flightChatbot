@@ -2,13 +2,13 @@ const { Given, When, After } = require('@cucumber/cucumber');
 const apiHelpers = require('../../helpers/apiHelpers');
 
 After(async function () {
-    if (this.createdOrderId) {
+    if (this.createdPnr) {
       try {
-        await apiHelpers.deleteOrder(this.createdOrderId);
+        await apiHelpers.deleteOrder(this.createdPnr);
       } catch (_) {}
-      this.createdOrderId = null;
+      this.createdPnr = null;
     }
-  });
+});
 
 Given('I create a flight order with valid data',{ timeout: 15000 }, async function () {
     try {
@@ -23,7 +23,7 @@ Given('I create a flight order with valid data',{ timeout: 15000 }, async functi
             }]
         }
     this.response = await apiHelpers.createOrder(testData);
-    this.createdOrderId = this.response.data.data.id;
+    this.createdPnr = this.response.data.data.associatedRecords[0].reference;
     }
     
     catch (e) {
@@ -31,17 +31,25 @@ Given('I create a flight order with valid data',{ timeout: 15000 }, async functi
     }
 });
 
-Given('a flight order with id {string} exists', async function (orderId) {
+Given('a flight order with pnr {string} exists', async function (pnr) {
     try {
-        this.response = await apiHelpers.getOrder(orderId);
+        this.response = await apiHelpers.getOrder(pnr);
     } catch (e) {
         this.response = e.response;
     }
 });
 
-When('I retrieve the flight order {string}', async function (orderId) {
+When('I retrieve the flight order by pnr {string}', async function (pnr) {
     try {
-        this.response = await apiHelpers.getOrder(orderId);
+        this.response = await apiHelpers.getOrder(pnr);
+    } catch (e) {
+        this.response = e.response;
+    }
+});
+
+When('I retrieve the created flight order by PNR', async function () {
+    try {
+        this.response = await apiHelpers.getOrder(this.createdPnr);
     } catch (e) {
         this.response = e.response;
     }
@@ -49,7 +57,7 @@ When('I retrieve the flight order {string}', async function (orderId) {
 
 When('I delete the created flight order', async function () {
     try {
-        this.response = await apiHelpers.deleteOrder(this.createdOrderId);
+        this.response = await apiHelpers.deleteOrder(this.createdPnr);
     } catch (e) {
         this.response = e.response;
     }

@@ -7,13 +7,13 @@ Feature: Booking Endpoints
     And the response body should contain "flight-order"
 
   Scenario: Retrieve an existing flight order
-    Given a flight order with id "MOCK-ORDER-1001" exists
-    When I retrieve the flight order "MOCK-ORDER-1001"
+    Given I create a flight order with valid data
+    When I retrieve the created flight order by PNR
     Then the response status should be 200
     And the response body should contain "flight-order"
 
   Scenario: Retrieve a non-existent flight order returns 404
-    When I retrieve the flight order "INVALID-ORDER-999"
+    When I retrieve the flight order by pnr "XXXXXX"
     Then the response status should be 404
 
   Scenario: Delete an existing flight order
