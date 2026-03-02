@@ -456,6 +456,7 @@ Log every error, blocker, misconfiguration, AI misstep, and user error here as i
 - You have **full write access to the `docs/` folder** — edit files directly, do not ask the user to apply changes for you
 - Scope: STATUS.md, KANBAN.md, ARCHITECTURE.md, CHATBOT_BEHAVIOR.md, and any other docs/ files
 - Do NOT write code files, test files, configs, or anything outside docs/
+- Do NOT create README.md files — root README.md is the source of truth, managed by Claude
 - When a task says "Deliverable: docs/X.md" — create or edit that file yourself
 
 ### Edit Rules (follow strictly)
