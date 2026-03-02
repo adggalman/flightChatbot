@@ -159,3 +159,5 @@ Thumbs.db
 # Proprietary data
 docs/paxManifest.json
 docs/KANBAN.md
+docs/DEV_TOOLING.md
+docs/CHATBOT_BEHAVIOR.md
