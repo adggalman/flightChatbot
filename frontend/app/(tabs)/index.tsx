@@ -1,10 +1,16 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import { StyleSheet, View, TextInput, FlatList, Text, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function ChatScreen() {
-  const [messages, setMessages] = useState<{ id: string; text: string; sender: string }[]>([]);
+  const [messages, setMessages] = useState<{ id: string; text: string; sender: string }[]>([
+    {
+      id: 'greeting',
+      text: 'Hi! I can help you with:\n• Searching for flights\n• Booking a flight\n• Retrieving a booking (PNR) \n• Cancelling a booking (PNR) \n\nHow can I help you today?',
+      sender: 'bot'
+    }
+  ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -14,15 +20,15 @@ export default function ChatScreen() {
     const userMessage = { id: Date.now().toString(), text: currentInput, sender: 'user' };
     setLoading(true);
 
-    setMessages(prev => [...prev, userMessage]);
     const loadingMessage = { id: 'loading', text: '...', sender: 'bot' };
-    setMessages(prev => [...prev, loadingMessage]);
+    setMessages(prev => [...prev, userMessage, loadingMessage]);
+    const filteredHistory = messages.filter(m => m.id !== 'greeting');
     setInput('');
     try {
       const response = await fetch('https://flightchatbot.vercel.app/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: currentInput, history: messages }),
+        body: JSON.stringify({ message: currentInput, history: filteredHistory }),
       });
 
       const data = await response.json();
@@ -43,28 +49,28 @@ export default function ChatScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <FlatList
-        data={messages}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <View style={[styles.bubble, item.sender === 'user' ? styles.userBubble : styles.botBubble]}>
-            <Text style={styles.bubbleText}>{item.text}</Text>
-          </View>
-        )}
-        contentContainerStyle={styles.messageList}
-      />
-      <View style={[styles.inputRow]}>
-        <TextInput
-          style={styles.input}
-          value={input}
-          onChangeText={setInput}
-          placeholder="Type a message..."
-          onSubmitEditing={sendMessage}
+        <FlatList
+          data={messages}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <View style={[styles.bubble, item.sender === 'user' ? styles.userBubble : styles.botBubble]}>
+              <Text style={styles.bubbleText}>{item.text}</Text>
+            </View>
+          )}
+          contentContainerStyle={styles.messageList}
         />
-        <TouchableOpacity style={[styles.sendButton, loading && { opacity: 0.5 }]} onPress={sendMessage} disabled={loading}>
-          <Text style={styles.sendText}>Send</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={[styles.inputRow]}>
+          <TextInput
+            style={styles.input}
+            value={input}
+            onChangeText={setInput}
+            placeholder="Type a message..."
+            onSubmitEditing={sendMessage}
+          />
+          <TouchableOpacity style={[styles.sendButton, loading && { opacity: 0.5 }]} onPress={sendMessage} disabled={loading}>
+            <Text style={styles.sendText}>Send</Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

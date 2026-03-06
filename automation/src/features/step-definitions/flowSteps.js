@@ -25,8 +25,9 @@ Then('the flight search should return results', function () {
 
 When('I create a flight order with the first result', { timeout: 15000 }, async function () {
   try {
+    const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14);
     const testData = {
-      travelers: [{ id: '1', name: { firstName: 'TEST', lastName: 'USER' } }],
+      travelers: [{ id: '1', name: { firstName: 'TEST', lastName: `RUN-${timestamp}` } }],
       flightOffers: [this.flightOffers[0]],
     };
     this.response = await apiHelpers.createOrder(testData);
