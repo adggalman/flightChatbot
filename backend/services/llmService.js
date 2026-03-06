@@ -10,12 +10,15 @@ const SYSTEM_PROMPT = `You are a flight booking assistant. You can help users wi
   - Cancelling a booking (PNR)
   - Looking up passenger lists for a flight (by flight number)
   - Today's date is ${new Date().toISOString().split('T')[0]}.
+  - When a user says "tomorrow", "next Monday", "next week", or any relative date, resolve it to an actual YYYY-MM-DD date using today's date before calling any tool.
+  - When a user provides only a day and month (e.g. "March 15"), assume the current year.
+  - When a user provides multiple details in a single message (e.g. date, name, and number of passengers together), extract all fields from that message at once — do not ask for fields the user has already provided.
 
   You CANNOT look up bookings by e-ticket number, frequent flyer number, or passenger name.
   If a user wants to retrieve or cancel a booking, ask for their PNR (booking reference) and email address.
   Always collect both before calling retrieve_booking or cancel_booking.
   Be concise and helpful.
-  You are only able to assist with flight-related requests. If a user asks about anything outside of flights, bookings, or passenger information, politely let them know you can only help with flight-related topics.
+  You can only assist with: searching flights, booking flights, retrieving a booking by PNR, and cancelling a booking by PNR. For anything else, politely decline.
   
    IMPORTANT: You must ALWAYS use the provided tools for any booking action.
     - To create a booking: you MUST call create_booking — never invent a PNR or order ID.
@@ -75,7 +78,7 @@ const model = genAI.getGenerativeModel({
         properties: {
           travelers: {
             type: 'ARRAY',
-            description: 'List of travelers, each with id (string) and name (firstName, lastName)',
+            description: 'List of travelers, each with id (sequential string starting from "1", e.g. "1", "2") and name (firstName, lastName). The id is NOT a passport or government ID — it is just a sequential identifier.',
             items: { type: 'OBJECT' }
           },
           flightOffers: {
@@ -112,6 +115,7 @@ async function chat(conversationHistory, role) {
   let result = await chatSession.sendMessage(lastMessage.parts[0].text);
   for (let rescounter = 0; rescounter < 5; rescounter++) {
     const response = result.response
+    if (!response.candidates || response.candidates.length === 0) break;
     const part = response.candidates[0].content.parts[0]
     if (part.functionCall) {
       const functionName = part.functionCall.name;

@@ -143,7 +143,7 @@ Status legend: 🔲 Pending | 🔄 In Progress | 👀 In Review (done, awaiting 
 | Task 2 — Add runs.html screenshot to README | ✅ Done |
 | Task 3 — Add Allure screenshot to README | ✅ Done |
 | Task 4 — Final README review | ✅ Done |
-| Task 5 — UX Research: Airline Chatbot Benchmark Study | 👀 In Review |
+| Task 5 — UX Research: Airline Chatbot Benchmark Study | ✅ Done |
 | Task 6 — Update Built Components table | ✅ Done |
 | Task 7 — Research: Skills, Agents, MCP | ✅ Done |
 | Task 8 — Learning Journey: Agents, Skills, MCP | ✅ Done |
@@ -443,6 +443,7 @@ Log every error, blocker, misconfiguration, AI misstep, and user error here as i
 | 19 | AI misstep | Reviewed LOGGING_AUDIT.md from memory instead of re-reading the file — Gemini had updated it but Claude gave feedback on the stale version | Rule added: always re-read docs files before giving feedback, never rely on in-session memory |
 | 20 | AI misstep | Gemini attempted to write a .js script (code implementation), violating role definitions in `docs/WORKFLOW.md` where the Tech Lead is responsible for code. | Rule added: Before starting implementation, Gemini must verify the task type against the roles defined in `docs/WORKFLOW.md`. |
 | 21 | AI misstep | When user confirmed verify-env passed, Claude deflected KANBAN update back to user ("Mark /verify-env done then") — KANBAN.md is in docs/ and Claude's responsibility to update. | Rule: when a task completes, update KANBAN.md immediately without waiting for user to prompt. |
+| 22 | AI misstep | Flagged GEMINI.md line 16 as incorrect — re-reading confirmed the heuristic was right as written. Gemini pushed back and was correct. | Rule: re-read before flagging — don't flag issues without verifying they are actually wrong. |
 
 ---
 
