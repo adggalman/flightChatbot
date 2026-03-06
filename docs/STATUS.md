@@ -441,6 +441,7 @@ Log every error, blocker, misconfiguration, AI misstep, and user error here as i
 | 17 | AI misstep | Embedded Python `-c` inline in YAML `run:` block — code at column 0 broke YAML indentation, workflow showed as file path instead of name (parse error) | Replaced with heredoc to `/tmp/parse_report.py` to keep Python properly indented |
 | 18 | AI misstep | `flight-booking.feature` was edited (orderId → PNR step rename) but not staged before commit `f261818` — CI ran old step text, causing `undefined` status and exit code 1 | Rule added: run `git status` after staging to verify all related files are included before committing |
 | 19 | AI misstep | Reviewed LOGGING_AUDIT.md from memory instead of re-reading the file — Gemini had updated it but Claude gave feedback on the stale version | Rule added: always re-read docs files before giving feedback, never rely on in-session memory |
+| 20 | AI misstep | Gemini attempted to write a .js script (code implementation), violating role definitions in `docs/WORKFLOW.md` where the Tech Lead is responsible for code. | Rule added: Before starting implementation, Gemini must verify the task type against the roles defined in `docs/WORKFLOW.md`. |
 
 ---
 

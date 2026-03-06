@@ -11,6 +11,25 @@ const mockClient = axios.create({
     headers: { 'x-service-key': process.env.SERVICE_API_KEY },
 });
 
+const addErrorInterceptor = (client) => {
+    client.interceptors.response.use(
+        (response) => response,
+        (error) => {
+            if (error.response) {
+                console.error(
+                    `[API ERROR] ${error.config.method.toUpperCase()} ${error.config.url}`,
+                    `| Status: ${error.response.status}`,
+                    `| Body:`, JSON.stringify(error.response.data)
+                );
+            }
+            return Promise.reject(error);
+        }
+    );
+};
+
+addErrorInterceptor(backendClient);
+addErrorInterceptor(mockClient);
+
 // Backend
 const getHealth = () => backendClient.get(apiSpec.health);
 const searchFlights = (params) => backendClient.get(apiSpec.flightSearch, { params });

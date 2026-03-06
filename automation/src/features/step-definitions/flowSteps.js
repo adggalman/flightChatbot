@@ -3,17 +3,18 @@ const apiHelpers = require('../../helpers/apiHelpers');
 const assert = require('assert');
 
 Given('I search for flights from {string} to {string}', { timeout: 30000 }, async function (origin,
-destination) {
+  destination) {
   try {
     this.response = await apiHelpers.searchFlights({
       origin: origin,
       destination: destination,
       departureDate: '2026-12-01',
       adults: 1,
-      max :5,
+      max: 5,
     });
     this.flightOffers = this.response.data;
   } catch (e) {
+    if (!e.response) console.error(`[NON-HTTP ERROR] ${e.message}`);
     this.response = e.response;
   }
 });
@@ -31,6 +32,7 @@ When('I create a flight order with the first result', { timeout: 15000 }, async 
     this.response = await apiHelpers.createOrder(testData);
     this.createdPnr = this.response.data.data.associatedRecords[0].reference;
   } catch (e) {
+    if (!e.response) console.error(`[NON-HTTP ERROR] ${e.message}`);
     this.response = e.response;
   }
 });
@@ -43,6 +45,7 @@ When('I retrieve the created order', async function () {
   try {
     this.response = await apiHelpers.getOrder(this.createdPnr);
   } catch (e) {
+    if (!e.response) console.error(`[NON-HTTP ERROR] ${e.message}`);
     this.response = e.response;
   }
 });
@@ -55,6 +58,7 @@ When('I cancel the created order', async function () {
   try {
     this.response = await apiHelpers.deleteOrder(this.createdPnr);
   } catch (e) {
+    if (!e.response) console.error(`[NON-HTTP ERROR] ${e.message}`);
     this.response = e.response;
   }
 });
@@ -67,6 +71,7 @@ When('I retrieve the cancelled order', async function () {
   try {
     this.response = await apiHelpers.getOrder(this.createdPnr);
   } catch (e) {
+    if (!e.response) console.error(`[NON-HTTP ERROR] ${e.message}`);
     this.response = e.response;
   }
 });

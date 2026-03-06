@@ -18,5 +18,6 @@ Before(async function (scenario) {
 After(async function (scenario) {
     if (scenario.result.status === 'FAILED') {
         console.log(`FAILED: ${scenario.pickle.name}`);
+        console.error(`REASON: ${scenario.result.message}`);
     }
 });

@@ -32,6 +32,7 @@ Given(
       this.response = await apiHelpers.sendChat(message);
     }
     catch (e) {
+      if (!e.response) console.error(`[NON-HTTP ERROR] ${e.message}`);
       this.response = e.response;
     }
   }
@@ -46,6 +47,7 @@ Given(
         this.response = await apiHelpers.sendChat(message);
       }
       catch (e) {
+        if (!e.response) console.error(`[NON-HTTP ERROR] ${e.message}`);
         this.response = e.response;
       }
     }

@@ -18,7 +18,7 @@ Fill in each key. Never commit `.env`.
 
 **What it does:** Gives Gemini CLI web search capability via `run_shell_command`.
 
-**Sign up:** https://app.tavily.com — free tier available.
+**Sign up:** https://app.tavily.com — free tier, **1,000 requests/month limit.**
 
 **Get key:** Dashboard → API Keys → Create.
 
