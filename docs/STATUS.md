@@ -149,6 +149,7 @@ Status legend: 🔲 Pending | 🔄 In Progress | 👀 In Review (done, awaiting 
 | Task 8 — Learning Journey: Agents, Skills, MCP | ✅ Done |
 | Task 9 — API Inventory | ✅ Done |
 | Task 10 — CI/Test Logging Audit | 👀 In Review |
+| Task 11 — WORKFLOW.md | ✅ Done |
 
 ---
 
